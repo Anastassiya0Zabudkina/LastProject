@@ -16,7 +16,7 @@
 
     <item
         android:id="@+id/action_graduates"
-        android:title="Работы выпускников"
+        android:title="Работы"
         android:icon="@drawable/ic_action_graduates" />
 
     <item
