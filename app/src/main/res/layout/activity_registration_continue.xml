@@ -12,6 +12,7 @@
         android:padding="16dp"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
+        android:inputType="textPersonName"
         />
 
     <EditText
@@ -19,11 +20,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Phone Number"
-        android:inputType="text"
+        android:inputType="phone"
         android:padding="16dp"
         android:layout_below="@id/editFN"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
+        android:maxLength="12"
         />
 
     <EditText
@@ -31,11 +33,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Password"
-        android:inputType="text"
+        android:inputType="textPassword"
         android:padding="16dp"
         android:layout_below="@id/editTelephone"
         android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
+
         />
 
     <Button

@@ -1,11 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_account"
+        android:icon="@drawable/ic_action_profile"
         android:title="Личный кабинет" />
     <item
         android:id="@+id/nav_students"
+        android:icon="@drawable/ic_action_students"
         android:title="Список учащихся" />
     <item
         android:id="@+id/nav_contacts"
+        android:icon="@drawable/ic_action_contacts"
         android:title="Контакты преподавателей" />
 </menu>
