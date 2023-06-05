@@ -1,7 +1,5 @@
 package com.example.last;
 
-import com.example.last.User;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,7 +27,6 @@ public class RegistrationContinue extends AppCompatActivity {
     private EditText mEditPassword;
     private Button mButtonSave;
 
-    //private DatabaseReference mDatabaseRef;
     private DatabaseReference users;
     FirebaseDatabase db;
 
@@ -38,32 +35,26 @@ public class RegistrationContinue extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_continue);
 
-        // Связываем переменные с элементами на макете
         mEditFN = findViewById(R.id.editFN);
         mEditTelephone = findViewById(R.id.editTelephone);
         mEditPassword = findViewById(R.id.editTextPassword);
         mButtonSave = findViewById(R.id.buttonSave);
 
-        // Получаем ссылку на базу данных Firebase
-        //mDatabaseRef = FirebaseDatabase.getInstance("https://endingproject2023-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
         db = FirebaseDatabase.getInstance("https://endingproject2023-default-rtdb.europe-west1.firebasedatabase.app/");
-        users = db.getReference().child("users");
-        // Определяем, что происходит при нажатии на кнопку "Save"
+        users = db.getReference("users");
+
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Получаем данные из полей ввода
                 String name = mEditFN.getText().toString().trim();
                 String telephone = mEditTelephone.getText().toString().trim();
                 String password = mEditPassword.getText().toString().trim();
 
-                // Проверяем, что поля не пустые
                 if (name.isEmpty() || telephone.isEmpty() || password.isEmpty()) {
                     Toast.makeText(RegistrationContinue.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Проверяем, есть ли в базе данных пользователь с таким же номером
                 Query query = users.orderByChild("telephone").equalTo(telephone);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -71,21 +62,14 @@ public class RegistrationContinue extends AppCompatActivity {
                         if (snapshot.exists()) {
                             Toast.makeText(RegistrationContinue.this, "User with this telephone already exists", Toast.LENGTH_SHORT).show();
                         } else {
-                            // Создаем новый объект User с введенными данными
                             User user = new User(name, telephone, password);
 
-                            DatabaseReference push = users.push();
-                            String userId = push.getKey();
-                            user.setUserId(userId);
-                            //push.setValue(user);
-                            // Записываем объект User в базу данных
-                            push.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            String userId = users.push().getKey();
+                            users.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
                                         Toast.makeText(RegistrationContinue.this, "User created successfully", Toast.LENGTH_SHORT).show();
-
-                                        // Переходим на активити Registration
                                         Intent intent = new Intent(RegistrationContinue.this, Registration.class);
                                         startActivity(intent);
                                     } else {
