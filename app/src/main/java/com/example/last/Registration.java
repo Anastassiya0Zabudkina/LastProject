@@ -113,7 +113,9 @@ public class Registration extends AppCompatActivity {
                                 editor.apply();
                             }
 
+                            // Передаем имя пользователя в MainActivity
                             Intent intent = new Intent(Registration.this, MainActivity.class);
+                            intent.putExtra("username", name);
                             startActivity(intent);
                             finish();
                             return;
@@ -132,3 +134,4 @@ public class Registration extends AppCompatActivity {
         });
     }
 }
+
