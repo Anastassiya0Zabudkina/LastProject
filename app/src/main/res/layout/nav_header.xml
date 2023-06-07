@@ -12,13 +12,16 @@
         android:layout_width="64dp"
         android:layout_height="64dp"
         android:src="@drawable/user_photo"
-        android:scaleType="centerCrop" />
+        android:scaleType="centerCrop"
+        android:clickable="true"
+        android:longClickable="true"
+        android:onClick="onUserPhotoClick" />
 
     <TextView
         android:id="@+id/username_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="John Doe"
+        android:text="Я"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:gravity="start"
