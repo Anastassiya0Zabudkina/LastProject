@@ -1,4 +1,5 @@
 package com.example.last;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,6 +76,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        userPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFullscreenPhoto();
+            }
+        });
+
         userPhoto.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -115,6 +123,18 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 
+    private void openFullscreenPhoto() {
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String savedFilePath = preferences.getString("user_photo_path", null);
+        if (savedFilePath != null) {
+            Intent intent = new Intent(MainActivity.this, FullscreenPhotoActivity.class);
+            intent.putExtra("photo_path", savedFilePath);
+            startActivity(intent);
+        } else {
+            Toast.makeText(MainActivity.this, "No photo selected", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -148,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
             // Теперь вы можете использовать этот файл по вашему усмотрению.
             String filePath = outputFile.getAbsolutePath();
             saveUserPhoto(filePath);
+            loadUserPhoto(); // Обновляем фотографию
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(MainActivity.this, "Ошибка при сохранении фото", Toast.LENGTH_SHORT).show();
@@ -186,3 +207,5 @@ public class MainActivity extends AppCompatActivity {
         loadUserPhoto();
     }
 }
+
+

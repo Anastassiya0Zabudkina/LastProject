@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LAST"
         tools:targetApi="31">
         <activity
+            android:name=".FullscreenPhotoActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegistrationContinue"
             android:exported="false" />
         <activity
@@ -35,7 +38,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
-
