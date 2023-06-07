@@ -1,5 +1,4 @@
 package com.example.last;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,6 +6,7 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
     private void uploadPhoto(Uri imageUri) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(imageUri);
-            File storageDir = getFilesDir(); // Получаем директорию внутреннего хранилища приложения
+            File storageDir = getExternalFilesDir(null); // Получаем директорию внешнего хранилища приложения
             File outputFile = new File(storageDir, "user_photo.jpg"); // Указываем имя файла
 
             FileOutputStream outputStream = new FileOutputStream(outputFile);
@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
             outputStream.close();
             inputStream.close();
 
-            // Фотография успешно сохранена во внутреннем хранилище приложения.
+            // Фотография успешно сохранена во внешнем хранилище приложения.
             // Теперь вы можете использовать этот файл по вашему усмотрению.
             String filePath = outputFile.getAbsolutePath();
             saveUserPhoto(filePath);
@@ -155,32 +155,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void saveUserPhoto(String filePath) {
-        // Здесь вы можете выполнить необходимые действия с сохраненной фотографией,
-        // например, отобразить ее в ImageView или выполнить другую обработку.
-        // В этом примере мы просто загрузим фотографию на место предыдущей.
-        File photoFile = new File(filePath);
-        if (photoFile.exists()) {
-            Uri photoUri = Uri.fromFile(photoFile);
-            userPhoto.setImageURI(photoUri);
-            Toast.makeText(MainActivity.this, "Фотография успешно сохранена", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(MainActivity.this, "Ошибка при сохранении фотографии", Toast.LENGTH_SHORT).show();
+        // Сохранение пути к файлу фотографии в настройках приложения
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("user_photo_path", filePath);
+        editor.apply();
+    }
+
+    private void loadUserPhoto() {
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String savedFilePath = preferences.getString("user_photo_path", null);
+        if (savedFilePath != null) {
+            File photoFile = new File(savedFilePath);
+            if (photoFile.exists()) {
+                Uri photoUri = Uri.fromFile(photoFile);
+
+                // Добавление случайного значения к URI для обновления изображения
+                String randomValue = String.valueOf(System.currentTimeMillis());
+                Uri updatedPhotoUri = photoUri.buildUpon().appendQueryParameter("random", randomValue).build();
+
+                userPhoto.setImageURI(updatedPhotoUri);
+            }
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Обновление фотографии при каждом отображении активности
+        loadUserPhoto();
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
