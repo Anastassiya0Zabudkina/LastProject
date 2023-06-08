@@ -1,5 +1,6 @@
 package com.example.last;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
@@ -35,9 +36,34 @@ public class MainActivity extends AppCompatActivity {
     private ImageView userPhoto;
 
     @Override
+    protected int getLayoutResourceId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected void handleBottomNavigationItemSelected(int itemId) {
+        switch (itemId) {
+            case R.id.action_news:
+                // Обработка нажатия на элемент "Новости"
+                break;
+            case R.id.action_schedule:
+                // Обработка нажатия на элемент "Расписание"
+                break;
+            case R.id.action_chat:
+                // Обработка нажатия на элемент "Чат"
+                break;
+            case R.id.action_graduates:
+                // Обработка нажатия на элемент "Работы выпускников"
+                break;
+            case R.id.action_more:
+                openDrawer();
+                break;
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
         drawerLayout = findViewById(R.id.drawerLayout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
@@ -55,25 +81,8 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_news:
-                        // Обработка нажатия на элемент "Новости"
-                        return true;
-                    case R.id.action_schedule:
-                        // Обработка нажатия на элемент "Расписание"
-                        return true;
-                    case R.id.action_chat:
-                        // Обработка нажатия на элемент "Чат"
-                        return true;
-                    case R.id.action_graduates:
-                        // Обработка нажатия на элемент "Работы выпускников"
-                        return true;
-                    case R.id.action_more:
-                        openDrawer();
-                        return true;
-                    default:
-                        return false;
-                }
+                handleBottomNavigationItemSelected(item.getItemId());
+                return true;
             }
         });
 
@@ -262,6 +271,3 @@ public class MainActivity extends AppCompatActivity {
         loadUserPhoto();
     }
 }
-
-
-

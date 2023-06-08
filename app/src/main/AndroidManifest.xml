@@ -15,6 +15,9 @@
         android:theme="@style/Theme.LAST"
         tools:targetApi="31">
         <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+        <activity
             android:name=".TeachersActivity"
             android:exported="false" />
         <activity
