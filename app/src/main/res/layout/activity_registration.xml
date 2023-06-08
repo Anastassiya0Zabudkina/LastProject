@@ -54,5 +54,14 @@
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
         />
+    <CheckBox
+        android:id="@+id/checkBoxRememberMe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Запомнить меня"
+        android:layout_below="@id/buttonRegister"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true"
+        />
 
 </RelativeLayout>

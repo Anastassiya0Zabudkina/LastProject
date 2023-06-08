@@ -1,14 +1,36 @@
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_action_profile"
+            android:title="Личный кабинет" />
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@drawable/ic_action_students"
+            android:title="Список учащихся" />
+        <item
+            android:id="@+id/nav_contacts"
+            android:icon="@drawable/ic_action_contacts"
+            android:title="Контакты преподавателей" />
+    </group>
+
     <item
-        android:id="@+id/nav_account"
-        android:icon="@drawable/ic_action_profile"
-        android:title="Личный кабинет" />
-    <item
-        android:id="@+id/nav_students"
-        android:icon="@drawable/ic_action_students"
-        android:title="Список учащихся" />
-    <item
-        android:id="@+id/nav_contacts"
-        android:icon="@drawable/ic_action_contacts"
-        android:title="Контакты преподавателей" />
+        android:title="Настройки"
+        android:id="@+id/nav_settings">
+        <menu>
+            <item
+                android:id="@+id/nav_theme"
+                android:title="Переключить тему"
+                android:icon="@drawable/ic_action_theme" />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Выход"
+                android:icon="@drawable/ic_action_logout" />
+        </menu>
+    </item>
+
 </menu>
+
+

@@ -1,10 +1,19 @@
 package com.example.last;
 
 public class User {
+    private int index; // Нумерация
     private String name;
     private String telephone;
     private String password;
     private String userId;
+
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 
 
     public User(){
