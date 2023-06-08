@@ -101,6 +101,8 @@ public class MainActivity extends AppCompatActivity {
                         return true;
                     case R.id.nav_students:
                         // Обработка нажатия на элемент "Список учащихся"
+                        Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);
+                        startActivity(usersIntent);
                         return true;
                     case R.id.nav_contacts:
                         // Обработка нажатия на элемент "Контакты преподавателей"
