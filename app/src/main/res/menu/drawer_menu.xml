@@ -16,6 +16,21 @@
             android:title="Контакты преподавателей" />
     </group>
 
+    <item
+        android:title="Настройки"
+        android:id="@+id/nav_settings">
+        <menu>
+            <item
+                android:id="@+id/nav_theme"
+                android:title="Переключить тему"
+                android:icon="@drawable/ic_action_theme" />
+            <item
+                android:id="@+id/nav_logout"
+                android:title="Выход"
+                android:icon="@drawable/ic_action_logout" />
+        </menu>
+    </item>
+
 </menu>
 
 

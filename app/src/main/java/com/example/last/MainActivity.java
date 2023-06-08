@@ -3,6 +3,7 @@ package com.example.last;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -88,6 +89,33 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View v) {
                 openGallery();
                 return true;
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.nav_account:
+                        // Обработка нажатия на элемент "Личный кабинет"
+                        return true;
+                    case R.id.nav_students:
+                        // Обработка нажатия на элемент "Список учащихся"
+                        return true;
+                    case R.id.nav_contacts:
+                        // Обработка нажатия на элемент "Контакты преподавателей"
+                        return true;
+                    case R.id.nav_theme:
+                        // Обработка нажатия на элемент "Тема"
+                        toggleTheme();
+                        return true;
+                    case R.id.nav_logout:
+                        // Обработка нажатия на элемент "Выход"
+                        logout();
+                        return true;
+                    default:
+                        return false;
+                }
             }
         });
     }
@@ -200,6 +228,29 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void toggleTheme() {
+        int currentNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+        if (currentNightMode == android.content.res.Configuration.UI_MODE_NIGHT_YES) {
+            // Если текущая тема - темная, переключаем на светлую
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else {
+            // Если текущая тема - светлая, переключаем на темную
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        }
+    }
+
+    private void logout() {
+        // Удаляем сохраненные данные пользователя и переходим на экран авторизации
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("user_photo_path");
+        editor.apply();
+
+        Intent intent = new Intent(MainActivity.this, Registration.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -207,5 +258,6 @@ public class MainActivity extends AppCompatActivity {
         loadUserPhoto();
     }
 }
+
 
 
