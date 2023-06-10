@@ -15,7 +15,7 @@
         <item name="android:headerBackground">@color/header_background</item>
 
     </style>
-    <style name="AppTheme.Switch" parent="Theme.LAST">
-        <!-- Customize attributes for the switch here. -->
-    </style>
 </resources>
+
+
+

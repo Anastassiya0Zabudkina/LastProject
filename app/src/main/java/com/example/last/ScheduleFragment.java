@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -88,21 +89,20 @@ public class ScheduleFragment extends Fragment {
 
         //Понедельник:
         data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Пн"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Пн"));
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", "Пн"));
         //Вторник:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Вт"));
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", "Вт"));
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Вт"));
         //Среда:
         data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Ср"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Ср"));
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", "Ср"));
         //Четверг:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Чт"));
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", "Чт"));
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Чт"));
         //Пятница:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Пт"));
+
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Пт"));
         //Суббота:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Online", "Сб"));
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Сб"));
 
         return data;
@@ -151,6 +151,9 @@ public class ScheduleFragment extends Fragment {
             scheduleMap.put(date, filteredSchedule);
         }
     }
+
+
+
 }
 
 
