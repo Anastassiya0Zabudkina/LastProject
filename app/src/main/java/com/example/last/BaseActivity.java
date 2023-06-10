@@ -1,3 +1,4 @@
+// BaseActivity.java
 package com.example.last;
 
 import androidx.annotation.NonNull;
@@ -35,3 +36,4 @@ public abstract class BaseActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(itemId);
     }
 }
+

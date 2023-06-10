@@ -1,13 +1,11 @@
 package com.example.last;
 
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
+import com.example.last.ScheduleFragment;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -48,7 +46,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.action_schedule:
                 // Обработка нажатия на элемент "Расписание"
-                break;
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new ScheduleFragment())
+                        .commit();
+                return;
             case R.id.action_chat:
                 // Обработка нажатия на элемент "Чат"
                 break;
@@ -66,7 +67,7 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationView navigationView = findViewById(R.id.navigationView);
 
         View headerView = navigationView.getHeaderView(0);
@@ -78,13 +79,7 @@ public class MainActivity extends BaseActivity {
             textViewUsername.setText(username);
         }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                handleBottomNavigationItemSelected(item.getItemId());
-                return true;
-            }
-        });
+        setupBottomNavigationMenu();
 
         userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +124,17 @@ public class MainActivity extends BaseActivity {
                     default:
                         return false;
                 }
+            }
+        });
+    }
+
+    private void setupBottomNavigationMenu() {
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                handleBottomNavigationItemSelected(item.getItemId());
+                return true;
             }
         });
     }
