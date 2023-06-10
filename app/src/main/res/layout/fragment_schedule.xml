@@ -15,50 +15,44 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Пн"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Пн" />
 
         <Button
             android:id="@+id/buttonDate2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Вт"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Вт" />
 
         <Button
             android:id="@+id/buttonDate3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Ср"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Ср" />
         <Button
             android:id="@+id/buttonDate4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Чт"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Чт" />
         <Button
             android:id="@+id/buttonDate5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Пт"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Пт" />
         <Button
             android:id="@+id/buttonDate6"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Сб"
-            android:background="@drawable/rounded_corner_background"/>
+            android:text="Сб" />
 
 
     </LinearLayout>
 
-    <!-- Выбранная дата -->
+     Выбранная дата
     <LinearLayout
         android:id="@+id/selectedScheduleLayout"
         android:layout_width="match_parent"
@@ -105,5 +99,7 @@
         android:layout_height="wrap_content" />
 
 </LinearLayout>
+
+
 
 

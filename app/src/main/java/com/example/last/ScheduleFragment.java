@@ -1,5 +1,6 @@
 package com.example.last;
 
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,7 +13,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ScheduleFragment extends Fragment {
 
@@ -23,6 +26,7 @@ public class ScheduleFragment extends Fragment {
     private List<String> dates;
     private Button[] dateButtons;
     private TextView selectedDateTextView;
+    private Map<String, List<ScheduleItem>> scheduleMap;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,9 +44,9 @@ public class ScheduleFragment extends Fragment {
         Button buttonDate5 = view.findViewById(R.id.buttonDate5);
         Button buttonDate6 = view.findViewById(R.id.buttonDate6);
 
-
         dateButtons = new Button[]{buttonDate1, buttonDate2, buttonDate3, buttonDate4, buttonDate5, buttonDate6};
         selectedDateTextView = view.findViewById(R.id.titleTextView);
+
 
         // Создание списка дат
         dates = createDates();
@@ -63,6 +67,9 @@ public class ScheduleFragment extends Fragment {
         // Создание списка данных для расписания
         scheduleItems = createScheduleData();
 
+        // Создание карты расписания
+        createScheduleMap();
+
         // Создание и установка адаптера
         adapter = new ScheduleAdapter(scheduleItems);
         recyclerView.setAdapter(adapter);
@@ -80,22 +87,23 @@ public class ScheduleFragment extends Fragment {
         // Добавление данных расписания
 
         //Понедельник:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline"));
-        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Пн"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Пн"));
         //Вторник:
-        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Вт"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Вт"));
         //Среда:
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline"));
-        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Ср"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Ср"));
         //Четверг:
-        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Чт"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Чт"));
         //Пятница:
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Пт"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Пт"));
         //Суббота:
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online"));
-
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Online", "Сб"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Сб"));
 
         return data;
     }
@@ -115,34 +123,35 @@ public class ScheduleFragment extends Fragment {
 
     private void selectDate(int index) {
         // Отображение выбранного занятия
-        ScheduleItem selectedSchedule = scheduleItems.get(index);
-
-        // Обновление отображения выбранного занятия
-        TextView titleTextView = view.findViewById(R.id.titleTextView);
-        TextView timeTextView = view.findViewById(R.id.timeTextView);
-        TextView locationTextView = view.findViewById(R.id.locationTextView);
-
-        titleTextView.setText(selectedSchedule.getTitle());
-        timeTextView.setText(selectedSchedule.getTime());
-        locationTextView.setText(selectedSchedule.getLocation());
+        String selectedDate = dates.get(index);
+        selectedDateTextView.setText(selectedDate);
     }
-
 
     private void updateSchedule() {
         // Фильтрация расписания по выбранной дате
-        List<ScheduleItem> filteredSchedule = new ArrayList<>();
         String selectedDate = selectedDateTextView.getText().toString();
-
-        if (selectedDate != null) {
-            for (ScheduleItem scheduleItem : scheduleItems) {
-                if (selectedDate.equals(scheduleItem.getDate())) {
-                    filteredSchedule.add(scheduleItem);
-                }
-            }
-        }
+        List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
 
         // Обновление данных адаптера
         adapter.setData(filteredSchedule);
     }
+
+    private void createScheduleMap() {
+        scheduleMap = new HashMap<>();
+
+        for (String date : dates) {
+            List<ScheduleItem> filteredSchedule = new ArrayList<>();
+
+            for (ScheduleItem scheduleItem : scheduleItems) {
+                if (date.equals(scheduleItem.getDate())) {
+                    filteredSchedule.add(scheduleItem);
+                }
+            }
+
+            scheduleMap.put(date, filteredSchedule);
+        }
+    }
 }
+
+
 
