@@ -15,21 +15,40 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="10 июня" />
+            android:text="Пн" />
 
         <Button
             android:id="@+id/buttonDate2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="11 июня" />
+            android:text="Вт" />
 
         <Button
             android:id="@+id/buttonDate3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="12 июня" />
+            android:text="Ср" />
+        <Button
+            android:id="@+id/buttonDate4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Чт" />
+        <Button
+            android:id="@+id/buttonDate5"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Пт" />
+        <Button
+            android:id="@+id/buttonDate6"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Сб" />
+
 
     </LinearLayout>
 

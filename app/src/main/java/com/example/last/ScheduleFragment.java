@@ -3,12 +3,14 @@ package com.example.last;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,8 +36,12 @@ public class ScheduleFragment extends Fragment {
         Button buttonDate1 = view.findViewById(R.id.buttonDate1);
         Button buttonDate2 = view.findViewById(R.id.buttonDate2);
         Button buttonDate3 = view.findViewById(R.id.buttonDate3);
+        Button buttonDate4 = view.findViewById(R.id.buttonDate4);
+        Button buttonDate5 = view.findViewById(R.id.buttonDate5);
+        Button buttonDate6 = view.findViewById(R.id.buttonDate6);
 
-        dateButtons = new Button[]{buttonDate1, buttonDate2, buttonDate3};
+
+        dateButtons = new Button[]{buttonDate1, buttonDate2, buttonDate3, buttonDate4, buttonDate5, buttonDate6};
         selectedDateTextView = view.findViewById(R.id.titleTextView);
 
         // Создание списка дат
@@ -76,14 +82,22 @@ public class ScheduleFragment extends Fragment {
         data.add(new ScheduleItem("Занятие 2", "11:00 - 12:30", "Место 2"));
         data.add(new ScheduleItem("Занятие 3", "9:30 - 11:00", "Место 3"));
         // Добавьте остальные занятия
+        data.add(new ScheduleItem("Занятие 4", "13:00 - 14:30", "Место 4"));
+        data.add(new ScheduleItem("Занятие 5", "15:00 - 16:30", "Место 5"));
+        data.add(new ScheduleItem("Занятие 6", "15:00 - 16:30", "Место 6"));
 
         return data;
     }
 
     private List<String> createDates() {
         List<String> dates = new ArrayList<>();
-        dates.add("10 июня");
-        dates.add("11 июня");
+        dates.add("Пн");
+        dates.add("Вт");
+        dates.add("Ср");
+        dates.add("Чт");
+        dates.add("Пт");
+        dates.add("Сб");
+
         // Добавьте остальные даты
         return dates;
     }
