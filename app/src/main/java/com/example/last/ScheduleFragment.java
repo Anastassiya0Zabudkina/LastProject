@@ -78,13 +78,24 @@ public class ScheduleFragment extends Fragment {
         List<ScheduleItem> data = new ArrayList<>();
 
         // Добавление данных расписания
-        data.add(new ScheduleItem("Занятие 1", "9:00 - 10:30", "Место 1"));
-        data.add(new ScheduleItem("Занятие 2", "11:00 - 12:30", "Место 2"));
-        data.add(new ScheduleItem("Занятие 3", "9:30 - 11:00", "Место 3"));
-        // Добавьте остальные занятия
-        data.add(new ScheduleItem("Занятие 4", "13:00 - 14:30", "Место 4"));
-        data.add(new ScheduleItem("Занятие 5", "15:00 - 16:30", "Место 5"));
-        data.add(new ScheduleItem("Занятие 6", "15:00 - 16:30", "Место 6"));
+
+        //Понедельник:
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline"));
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline"));
+        //Вторник:
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline"));
+        //Среда:
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline"));
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline"));
+        //Четверг:
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline"));
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline"));
+        //Пятница:
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online"));
+        //Суббота:
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online"));
+
 
         return data;
     }
