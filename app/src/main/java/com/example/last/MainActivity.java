@@ -1,11 +1,13 @@
 package com.example.last;
 
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.example.last.ScheduleFragment;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -67,19 +69,26 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         drawerLayout = findViewById(R.id.drawerLayout);
-        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationView navigationView = findViewById(R.id.navigationView);
 
         View headerView = navigationView.getHeaderView(0);
         textViewUsername = headerView.findViewById(R.id.username_textview);
         userPhoto = headerView.findViewById(R.id.user_photo);
+        loadUserPhoto();
 
         String username = getIntent().getStringExtra("username");
         if (username != null) {
             textViewUsername.setText(username);
         }
 
-        setupBottomNavigationMenu();
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                handleBottomNavigationItemSelected(item.getItemId());
+                return true;
+            }
+        });
 
         userPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,17 +133,6 @@ public class MainActivity extends BaseActivity {
                     default:
                         return false;
                 }
-            }
-        });
-    }
-
-    private void setupBottomNavigationMenu() {
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                handleBottomNavigationItemSelected(item.getItemId());
-                return true;
             }
         });
     }
@@ -212,7 +210,7 @@ public class MainActivity extends BaseActivity {
             inputStream.close();
 
             // Фотография успешно сохранена во внешнем хранилище приложения.
-            // Теперь вы можете использовать этот файл по вашему усмотрению.
+            // Сохраняем путь к файлу фотографии
             String filePath = outputFile.getAbsolutePath();
             saveUserPhoto(filePath);
             loadUserPhoto(); // Обновляем фотографию
@@ -222,6 +220,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+
     private void saveUserPhoto(String filePath) {
         // Сохранение пути к файлу фотографии в настройках приложения
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -230,6 +229,7 @@ public class MainActivity extends BaseActivity {
         editor.apply();
     }
 
+
     private void loadUserPhoto() {
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         String savedFilePath = preferences.getString("user_photo_path", null);
@@ -237,15 +237,11 @@ public class MainActivity extends BaseActivity {
             File photoFile = new File(savedFilePath);
             if (photoFile.exists()) {
                 Uri photoUri = Uri.fromFile(photoFile);
-
-                // Добавление случайного значения к URI для обновления изображения
-                String randomValue = String.valueOf(System.currentTimeMillis());
-                Uri updatedPhotoUri = photoUri.buildUpon().appendQueryParameter("random", randomValue).build();
-
-                userPhoto.setImageURI(updatedPhotoUri);
+                userPhoto.setImageURI(photoUri);
             }
         }
     }
+
 
     private void toggleTheme() {
         int currentNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
@@ -262,8 +258,11 @@ public class MainActivity extends BaseActivity {
         // Удаляем сохраненные данные пользователя и переходим на экран авторизации
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("user_photo_path");
+        // Закомментируйте или удалите следующую строку, чтобы сохранить фотографию после выхода из аккаунта
+        // editor.remove("user_photo_path");
         editor.apply();
+
+        loadUserPhoto();
 
         Intent intent = new Intent(MainActivity.this, Registration.class);
         startActivity(intent);
@@ -273,7 +272,9 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Обновление фотографии при каждом отображении активности
-        loadUserPhoto();
+        loadUserPhoto(); // Обновление фотографии при каждом отображении активности
     }
 }
+
+
+
