@@ -1,10 +1,8 @@
 package com.example.last;
 
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -22,6 +24,9 @@ import java.util.Map;
 
 public class ScheduleFragment extends Fragment {
 
+    private static final String PREFS_NAME = "MyPrefs";
+    private static final String KEY_STATUS_PREFIX = "status_";
+
     private View view;
     private RecyclerView recyclerView;
     private ScheduleAdapter adapter;
@@ -30,10 +35,13 @@ public class ScheduleFragment extends Fragment {
     private Button[] dateButtons;
     private TextView selectedDateTextView;
     private Map<String, List<ScheduleItem>> scheduleMap;
+    private SharedPreferences sharedPreferences;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_schedule, container, false);
+
+        sharedPreferences = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
 
         recyclerView = view.findViewById(R.id.scheduleRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -71,14 +79,7 @@ public class ScheduleFragment extends Fragment {
             @Override
             public void onItemClick(int position) {
                 ScheduleItem item = scheduleItems.get(position);
-                adapter.setOnItemClickListener(new ScheduleAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(int position) {
-                        ScheduleItem item = scheduleItems.get(position);
-                        showEnrollmentStatusDialog(item.getTitle(), item.getStatus(), position);
-                    }
-                });
-
+                showEnrollmentStatusDialog(item.getTitle(), item.getStatus(), position);
             }
         });
 
@@ -100,6 +101,7 @@ public class ScheduleFragment extends Fragment {
                             ScheduleItem item = scheduleItems.get(position);
                             item.setStatus("Не записан");
                             adapter.notifyItemChanged(position);
+                            saveStatusToSharedPreferences(item.getDate(), "Не записан");
                             Toast.makeText(requireContext(), "Запись отменена", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -114,7 +116,6 @@ public class ScheduleFragment extends Fragment {
             // Если статус "Не записан", показать AlertDialog для записи
             String message = "Вы не записаны на занятие по \"" + course + "\".";
 
-
             new MaterialAlertDialogBuilder(requireContext())
                     .setTitle("Статус записи")
                     .setMessage(message)
@@ -124,6 +125,7 @@ public class ScheduleFragment extends Fragment {
                             ScheduleItem item = scheduleItems.get(position);
                             item.setStatus("Записан");
                             adapter.notifyItemChanged(position);
+                            saveStatusToSharedPreferences(item.getDate(), "Записан");
                             Toast.makeText(requireContext(), "Вы успешно записаны!", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -137,7 +139,11 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-
+    private void saveStatusToSharedPreferences(String date, String status) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_STATUS_PREFIX + date, status);
+        editor.apply();
+    }
 
     private List<ScheduleItem> createScheduleData() {
         List<ScheduleItem> data = new ArrayList<>();
@@ -152,6 +158,12 @@ public class ScheduleFragment extends Fragment {
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Чт"));
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Пт"));
         data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Сб"));
+
+        // Загрузить сохраненные статусы из SharedPreferences и применить их к элементам расписания
+        for (ScheduleItem item : data) {
+            String status = sharedPreferences.getString(KEY_STATUS_PREFIX + item.getDate(), "");
+            item.setStatus(status);
+        }
 
         return data;
     }
