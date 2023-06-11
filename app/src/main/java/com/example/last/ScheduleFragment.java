@@ -78,9 +78,12 @@ public class ScheduleFragment extends Fragment {
         adapter.setOnItemClickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                ScheduleItem item = scheduleItems.get(position);
+                String selectedDate = selectedDateTextView.getText().toString();
+                List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
+                ScheduleItem item = filteredSchedule.get(position);
                 showEnrollmentStatusDialog(item.getTitle(), item.getStatus(), position);
             }
+
         });
 
         selectDate(0);
@@ -90,6 +93,10 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void showEnrollmentStatusDialog(String course, String status, final int position) {
+        String selectedDate = selectedDateTextView.getText().toString();
+        List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
+        ScheduleItem item = filteredSchedule.get(position);
+
         if (status.equals("Записан")) {
             // Если статус "Записан", показать AlertDialog для отмены записи
             new MaterialAlertDialogBuilder(requireContext())
@@ -98,10 +105,9 @@ public class ScheduleFragment extends Fragment {
                     .setPositiveButton("Отменить запись", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ScheduleItem item = scheduleItems.get(position);
                             item.setStatus("Не записан");
                             adapter.notifyItemChanged(position);
-                            saveStatusToSharedPreferences(item.getDate(), "Не записан");
+                            saveStatusToSharedPreferences(position, "Не записан");
                             Toast.makeText(requireContext(), "Запись отменена", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -122,10 +128,9 @@ public class ScheduleFragment extends Fragment {
                     .setPositiveButton("Записаться", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ScheduleItem item = scheduleItems.get(position);
                             item.setStatus("Записан");
                             adapter.notifyItemChanged(position);
-                            saveStatusToSharedPreferences(item.getDate(), "Записан");
+                            saveStatusToSharedPreferences(position, "Записан");
                             Toast.makeText(requireContext(), "Вы успешно записаны!", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -138,6 +143,14 @@ public class ScheduleFragment extends Fragment {
                     .show();
         }
     }
+
+    private void saveStatusToSharedPreferences(int position, String status) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_STATUS_PREFIX + position, status);
+        editor.apply();
+    }
+
+
 
     private void saveStatusToSharedPreferences(String date, String status) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -188,7 +201,9 @@ public class ScheduleFragment extends Fragment {
         String selectedDate = selectedDateTextView.getText().toString();
         List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
         adapter.setData(filteredSchedule);
+        adapter.notifyDataSetChanged(); // Обновить весь список расписания
     }
+
 
     private void createScheduleMap() {
         scheduleMap = new HashMap<>();
