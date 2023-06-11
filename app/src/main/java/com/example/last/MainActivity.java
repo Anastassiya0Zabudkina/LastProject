@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -100,10 +102,31 @@ public class MainActivity extends BaseActivity {
         userPhoto.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                openGallery();
+                // Создание и настройка AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setItems(new CharSequence[]{"Удалить фото", "Обновить фото"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        // Действие "Удалить фото"
+                                        deletePhoto();
+                                        break;
+                                    case 1:
+                                        // Действие "Обновить фото"
+                                        openGallery();
+                                        break;
+                                }
+                            }
+                        });
+
+                // Отображение AlertDialog
+                builder.create().show();
+
                 return true;
             }
         });
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -195,8 +218,8 @@ public class MainActivity extends BaseActivity {
     private void uploadPhoto(Uri imageUri) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(imageUri);
-            File storageDir = getExternalFilesDir(null); // Получаем директорию внешнего хранилища приложения
-            File outputFile = new File(storageDir, "user_photo.jpg"); // Указываем имя файла
+            File storageDir = getExternalFilesDir(null);
+            File outputFile = new File(storageDir, "user_photo.jpg");
 
             FileOutputStream outputStream = new FileOutputStream(outputFile);
 
@@ -209,11 +232,9 @@ public class MainActivity extends BaseActivity {
             outputStream.close();
             inputStream.close();
 
-            // Фотография успешно сохранена во внешнем хранилище приложения.
-            // Сохраняем путь к файлу фотографии
             String filePath = outputFile.getAbsolutePath();
             saveUserPhoto(filePath);
-            loadUserPhoto(); // Обновляем фотографию
+            userPhoto.setImageURI(imageUri); // Отображаем новую фотографию
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(MainActivity.this, "Ошибка при сохранении фото", Toast.LENGTH_SHORT).show();
@@ -258,8 +279,7 @@ public class MainActivity extends BaseActivity {
         // Удаляем сохраненные данные пользователя и переходим на экран авторизации
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        // Закомментируйте или удалите следующую строку, чтобы сохранить фотографию после выхода из аккаунта
-        // editor.remove("user_photo_path");
+
         editor.apply();
 
         loadUserPhoto();
@@ -274,6 +294,16 @@ public class MainActivity extends BaseActivity {
         super.onResume();
         loadUserPhoto(); // Обновление фотографии при каждом отображении активности
     }
+    private void deletePhoto() {
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("user_photo_path");
+        editor.apply();
+        userPhoto.setImageResource(R.drawable.user_photo);
+
+        loadUserPhoto();
+    }
+
 }
 
 
