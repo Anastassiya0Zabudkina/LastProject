@@ -107,7 +107,7 @@ public class ScheduleFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             item.setStatus("Запись отменена");
                             adapter.notifyItemChanged(position);
-                            saveStatusToSharedPreferences(position, "Запись отменена");
+                            saveStatusToSharedPreferences(item.getDate(), "Запись отменена");
                             Toast.makeText(requireContext(), "Запись успешно отменена", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -130,7 +130,7 @@ public class ScheduleFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             item.setStatus("Записан");
                             adapter.notifyItemChanged(position);
-                            saveStatusToSharedPreferences(position, "Записан");
+                            saveStatusToSharedPreferences(item.getDate(), "Записан");
                             Toast.makeText(requireContext(), "Вы успешно записаны!", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -144,33 +144,26 @@ public class ScheduleFragment extends Fragment {
         }
     }
 
-    private void saveStatusToSharedPreferences(int position, String status) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_STATUS_PREFIX + position, status);
-        editor.apply();
-    }
-
-
-
     private void saveStatusToSharedPreferences(String date, String status) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(KEY_STATUS_PREFIX + date, status);
         editor.apply();
     }
 
+
     private List<ScheduleItem> createScheduleData() {
         List<ScheduleItem> data = new ArrayList<>();
 
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Пн"));
-        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", "Пн"));
-        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", "Вт"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Вт"));
-        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", "Ср"));
-        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", "Ср"));
-        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", "Чт"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", "Чт"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Пт"));
-        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", "Сб"));
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", dates.get(0))); // Пн
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", dates.get(0))); // Пн
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", dates.get(1))); // Вт
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", dates.get(1))); // Вт
+        data.add(new ScheduleItem("Python", "15:00 - 17:00", "Offline", dates.get(2))); // Ср
+        data.add(new ScheduleItem("Python", "17:00 - 19:00", "Offline", dates.get(2))); // Ср
+        data.add(new ScheduleItem("Java", "15:00 - 17:00", "Offline", dates.get(3))); // Чт
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Offline", dates.get(3))); // Чт
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", dates.get(4))); // Пт
+        data.add(new ScheduleItem("Java", "17:00 - 19:00", "Online", dates.get(5))); // Сб
 
         // Загрузить сохраненные статусы из SharedPreferences и применить их к элементам расписания
         for (ScheduleItem item : data) {
@@ -221,6 +214,7 @@ public class ScheduleFragment extends Fragment {
         }
     }
 }
+
 
 
 
