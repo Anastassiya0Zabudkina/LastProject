@@ -13,6 +13,15 @@ import java.util.List;
 public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.ScheduleViewHolder> {
 
     private List<ScheduleItem> scheduleItems;
+    private OnItemClickListener itemClickListener;
+
+    public interface OnItemClickListener {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        itemClickListener = listener;
+    }
 
     public ScheduleAdapter(List<ScheduleItem> scheduleItems) {
         this.scheduleItems = scheduleItems;
@@ -29,6 +38,15 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position) {
         ScheduleItem scheduleItem = scheduleItems.get(position);
         holder.bind(scheduleItem);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
@@ -45,18 +63,24 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
         private TextView titleTextView;
         private TextView timeTextView;
         private TextView locationTextView;
+        private TextView enrollmentStatusTextView;
+
 
         public ScheduleViewHolder(@NonNull View itemView) {
             super(itemView);
             titleTextView = itemView.findViewById(R.id.titleTextView);
             timeTextView = itemView.findViewById(R.id.timeTextView);
             locationTextView = itemView.findViewById(R.id.locationTextView);
+            enrollmentStatusTextView = itemView.findViewById(R.id.enrollmentStatusTextView);
         }
 
         public void bind(ScheduleItem scheduleItem) {
             titleTextView.setText(scheduleItem.getTitle());
             timeTextView.setText(scheduleItem.getTime());
             locationTextView.setText(scheduleItem.getLocation());
+            enrollmentStatusTextView.setText(scheduleItem.getStatus());
         }
     }
 }
+
+
