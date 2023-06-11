@@ -105,10 +105,10 @@ public class ScheduleFragment extends Fragment {
                     .setPositiveButton("Отменить запись", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            item.setStatus("Не записан");
+                            item.setStatus("Запись отменена");
                             adapter.notifyItemChanged(position);
-                            saveStatusToSharedPreferences(position, "Не записан");
-                            Toast.makeText(requireContext(), "Запись отменена", Toast.LENGTH_SHORT).show();
+                            saveStatusToSharedPreferences(position, "Запись отменена");
+                            Toast.makeText(requireContext(), "Запись успешно отменена", Toast.LENGTH_SHORT).show();
                         }
                     })
                     .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
