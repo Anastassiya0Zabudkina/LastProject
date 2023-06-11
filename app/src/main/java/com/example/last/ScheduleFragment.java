@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -87,34 +88,55 @@ public class ScheduleFragment extends Fragment {
         return view;
     }
 
-    private void showEnrollmentStatusDialog(String course, String status, int position) {
-        String message = "Курс \"" + course + "\".";
-
-        if (status.equals("Offline")) {
-            message += "\n\noffline";
+    private void showEnrollmentStatusDialog(String course, String status, final int position) {
+        if (status.equals("Записан")) {
+            // Если статус "Записан", показать AlertDialog для отмены записи
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Статус записи")
+                    .setMessage("Вы уже записаны на курс \"" + course + "\".\nХотите отменить запись?")
+                    .setPositiveButton("Отменить запись", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ScheduleItem item = scheduleItems.get(position);
+                            item.setStatus("Не записан");
+                            adapter.notifyItemChanged(position);
+                            Toast.makeText(requireContext(), "Запись отменена", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
         } else {
-            message += "\n\nonline";
-        }
+            // Если статус "Не записан", показать AlertDialog для записи
+            String message = "Вы не записаны на занятие по \"" + course + "\".";
 
-        new MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Статус записи")
-                .setMessage(message)
-                .setPositiveButton("Записаться", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        ScheduleItem item = scheduleItems.get(position);
-                        item.setStatus("Записан");
-                        adapter.notifyItemChanged(position);
-                    }
-                })
-                .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+
+            new MaterialAlertDialogBuilder(requireContext())
+                    .setTitle("Статус записи")
+                    .setMessage(message)
+                    .setPositiveButton("Записаться", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            ScheduleItem item = scheduleItems.get(position);
+                            item.setStatus("Записан");
+                            adapter.notifyItemChanged(position);
+                            Toast.makeText(requireContext(), "Вы успешно записаны!", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
+
 
 
     private List<ScheduleItem> createScheduleData() {
