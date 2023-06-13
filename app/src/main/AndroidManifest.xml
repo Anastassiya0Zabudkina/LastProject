@@ -15,13 +15,28 @@
         android:theme="@style/Theme.LAST"
         tools:targetApi="31">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:label="Смена Пароля"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="Профиль"
+            android:exported="false" />
+        <activity
+            android:name=".ScheduleFragment"
+            android:label="Расписание"
+            android:exported="false"
+            />
+        <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
             android:name=".TeachersActivity"
+            android:label="Контакты преподавателей"
             android:exported="false" />
         <activity
             android:name=".UsersActivity"
+            android:label="Список учащихся"
             android:exported="false" />
         <activity
             android:name=".FullscreenPhotoActivity"

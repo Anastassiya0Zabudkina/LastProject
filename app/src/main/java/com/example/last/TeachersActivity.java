@@ -25,8 +25,8 @@ public class TeachersActivity extends AppCompatActivity {
         recyclerView.setAdapter(teacherAdapter);
 
         // Создание списка преподавателей
-        teacherList.add(new Teacher("Крутиков Илья", "+77772145121"));
-        teacherList.add(new Teacher("Берик Умаров", "+77012188153"));
+        teacherList.add(new Teacher("Крутиков Илья   ", "+77772145121"));
+        teacherList.add(new Teacher("Берик Умаров   ", "+77012188153"));
 
 
         // Обновление адаптера

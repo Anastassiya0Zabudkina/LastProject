@@ -7,7 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AlertDialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
@@ -21,11 +23,18 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+
 
 public class MainActivity extends BaseActivity {
 
@@ -34,6 +43,11 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private TextView textViewUsername;
     private ImageView userPhoto;
+    private String userId;
+    private DatabaseReference databaseReference;
+
+    private static final String PREF_NAME = "login_pref";
+    private static final String KEY_USER_ID = "user_id";
 
     @Override
     protected int getLayoutResourceId() {
@@ -48,7 +62,10 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.action_schedule:
                 // Обработка нажатия на элемент "Расписание"
-                break;
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new ScheduleFragment())
+                        .commit();
+                return;
             case R.id.action_chat:
                 // Обработка нажатия на элемент "Чат"
                 break;
@@ -65,6 +82,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        userId = sharedPreferences.getString(KEY_USER_ID, "");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+
+        // Загрузка данных пользователя
+        loadUserData();
+
         drawerLayout = findViewById(R.id.drawerLayout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -72,11 +98,12 @@ public class MainActivity extends BaseActivity {
         View headerView = navigationView.getHeaderView(0);
         textViewUsername = headerView.findViewById(R.id.username_textview);
         userPhoto = headerView.findViewById(R.id.user_photo);
+        loadUserPhoto();
 
-        String username = getIntent().getStringExtra("username");
-        if (username != null) {
-            textViewUsername.setText(username);
-        }
+//        String username = getIntent().getStringExtra("username");
+//        if (username != null) {
+//            textViewUsername.setText(username);
+//        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -96,10 +123,31 @@ public class MainActivity extends BaseActivity {
         userPhoto.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                openGallery();
+                // Создание и настройка AlertDialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setItems(new CharSequence[]{"Удалить фото", "Обновить фото"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        // Действие "Удалить фото"
+                                        deletePhoto();
+                                        break;
+                                    case 1:
+                                        // Действие "Обновить фото"
+                                        openGallery();
+                                        break;
+                                }
+                            }
+                        });
+
+                // Отображение AlertDialog
+                builder.create().show();
+
                 return true;
             }
         });
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -107,7 +155,10 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_account:
                         // Обработка нажатия на элемент "Личный кабинет"
+                        Intent accountIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                        startActivity(accountIntent);
                         return true;
+
                     case R.id.nav_students:
                         // Обработка нажатия на элемент "Список учащихся"
                         Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);
@@ -191,8 +242,8 @@ public class MainActivity extends BaseActivity {
     private void uploadPhoto(Uri imageUri) {
         try {
             InputStream inputStream = getContentResolver().openInputStream(imageUri);
-            File storageDir = getExternalFilesDir(null); // Получаем директорию внешнего хранилища приложения
-            File outputFile = new File(storageDir, "user_photo.jpg"); // Указываем имя файла
+            File storageDir = getExternalFilesDir(null);
+            File outputFile = new File(storageDir, "user_photo.jpg");
 
             FileOutputStream outputStream = new FileOutputStream(outputFile);
 
@@ -205,16 +256,15 @@ public class MainActivity extends BaseActivity {
             outputStream.close();
             inputStream.close();
 
-            // Фотография успешно сохранена во внешнем хранилище приложения.
-            // Теперь вы можете использовать этот файл по вашему усмотрению.
             String filePath = outputFile.getAbsolutePath();
             saveUserPhoto(filePath);
-            loadUserPhoto(); // Обновляем фотографию
+            userPhoto.setImageURI(imageUri); // Отображаем новую фотографию
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(MainActivity.this, "Ошибка при сохранении фото", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     private void saveUserPhoto(String filePath) {
         // Сохранение пути к файлу фотографии в настройках приложения
@@ -224,6 +274,7 @@ public class MainActivity extends BaseActivity {
         editor.apply();
     }
 
+
     private void loadUserPhoto() {
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         String savedFilePath = preferences.getString("user_photo_path", null);
@@ -231,15 +282,11 @@ public class MainActivity extends BaseActivity {
             File photoFile = new File(savedFilePath);
             if (photoFile.exists()) {
                 Uri photoUri = Uri.fromFile(photoFile);
-
-                // Добавление случайного значения к URI для обновления изображения
-                String randomValue = String.valueOf(System.currentTimeMillis());
-                Uri updatedPhotoUri = photoUri.buildUpon().appendQueryParameter("random", randomValue).build();
-
-                userPhoto.setImageURI(updatedPhotoUri);
+                userPhoto.setImageURI(photoUri);
             }
         }
     }
+
 
     private void toggleTheme() {
         int currentNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
@@ -256,8 +303,10 @@ public class MainActivity extends BaseActivity {
         // Удаляем сохраненные данные пользователя и переходим на экран авторизации
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
-        editor.remove("user_photo_path");
+
         editor.apply();
+
+        loadUserPhoto();
 
         Intent intent = new Intent(MainActivity.this, Registration.class);
         startActivity(intent);
@@ -267,7 +316,44 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Обновление фотографии при каждом отображении активности
+        loadUserPhoto(); // Обновление фотографии при каждом отображении активности
+    }
+    private void deletePhoto() {
+        SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("user_photo_path");
+        editor.apply();
+        userPhoto.setImageResource(R.drawable.user_photo);
+
         loadUserPhoto();
     }
+
+
+    // Метод для загрузки данных пользователя из базы данных
+    private void loadUserData() {
+        DatabaseReference userReference = databaseReference.child("Users").child(userId);
+
+        DatabaseReference userRef = databaseReference.child("users").child(userId);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String name = dataSnapshot.child("name").getValue(String.class);
+                    if (name != null) {
+                        textViewUsername.setText(name);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, "Ошибка загрузки данных", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }
+
+
+
