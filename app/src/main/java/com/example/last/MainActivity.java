@@ -23,11 +23,18 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+
+
 
 public class MainActivity extends BaseActivity {
 
@@ -36,6 +43,11 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout drawerLayout;
     private TextView textViewUsername;
     private ImageView userPhoto;
+    private String userId;
+    private DatabaseReference databaseReference;
+
+    private static final String PREF_NAME = "login_pref";
+    private static final String KEY_USER_ID = "user_id";
 
     @Override
     protected int getLayoutResourceId() {
@@ -70,6 +82,15 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        userId = sharedPreferences.getString(KEY_USER_ID, "");
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        databaseReference = database.getReference();
+
+        // Загрузка данных пользователя
+        loadUserData();
+
         drawerLayout = findViewById(R.id.drawerLayout);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationView navigationView = findViewById(R.id.navigationView);
@@ -79,10 +100,10 @@ public class MainActivity extends BaseActivity {
         userPhoto = headerView.findViewById(R.id.user_photo);
         loadUserPhoto();
 
-        String username = getIntent().getStringExtra("username");
-        if (username != null) {
-            textViewUsername.setText(username);
-        }
+//        String username = getIntent().getStringExtra("username");
+//        if (username != null) {
+//            textViewUsername.setText(username);
+//        }
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -306,6 +327,31 @@ public class MainActivity extends BaseActivity {
 
         loadUserPhoto();
     }
+
+
+    // Метод для загрузки данных пользователя из базы данных
+    private void loadUserData() {
+        DatabaseReference userReference = databaseReference.child("Users").child(userId);
+
+        DatabaseReference userRef = databaseReference.child("users").child(userId);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    String name = dataSnapshot.child("name").getValue(String.class);
+                    if (name != null) {
+                        textViewUsername.setText(name);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Toast.makeText(MainActivity.this, "Ошибка загрузки данных", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }
 
