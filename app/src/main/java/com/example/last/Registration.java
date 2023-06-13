@@ -33,6 +33,9 @@ public class Registration extends AppCompatActivity {
     private static final String KEY_USERNAME = "username";
     private static final String KEY_PASSWORD = "password";
     private static final String KEY_REMEMBER_ME = "remember_me";
+    private static final String KEY_USER_ID = "user_id";
+
+    SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class Registration extends AppCompatActivity {
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
         sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,6 +74,7 @@ public class Registration extends AppCompatActivity {
         if (rememberMe) {
             String username = sharedPreferences.getString(KEY_USERNAME, "");
             String password = sharedPreferences.getString(KEY_PASSWORD, "");
+
             editTextUsername.setText(username);
             editTextPassword.setText(password);
         }
@@ -97,16 +102,17 @@ public class Registration extends AppCompatActivity {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         String storedPassword = userSnapshot.child("password").getValue(String.class);
                         if (storedPassword.equals(password)) {
+                            String userId = userSnapshot.child("userId").getValue(String.class);
+                            editor.putString(KEY_USER_ID, userId);
+                            editor.apply();
                             // Сохраняем данные пользователя, если выбрана опция "Запомнить меня"
                             if (checkBoxRememberMe.isChecked()) {
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString(KEY_USERNAME, name);
                                 editor.putString(KEY_PASSWORD, password);
                                 editor.putBoolean(KEY_REMEMBER_ME, true);
                                 editor.apply();
                             } else {
                                 // Если опция не выбрана, очищаем сохраненные данные
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.remove(KEY_USERNAME);
                                 editor.remove(KEY_PASSWORD);
                                 editor.remove(KEY_REMEMBER_ME);
@@ -134,4 +140,5 @@ public class Registration extends AppCompatActivity {
         });
     }
 }
+
 

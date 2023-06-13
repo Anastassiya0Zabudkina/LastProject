@@ -134,7 +134,10 @@ public class MainActivity extends BaseActivity {
                 switch (item.getItemId()) {
                     case R.id.nav_account:
                         // Обработка нажатия на элемент "Личный кабинет"
+                        Intent accountIntent = new Intent(MainActivity.this, ProfileActivity.class);
+                        startActivity(accountIntent);
                         return true;
+
                     case R.id.nav_students:
                         // Обработка нажатия на элемент "Список учащихся"
                         Intent usersIntent = new Intent(MainActivity.this, UsersActivity.class);

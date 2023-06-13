@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
     <solid android:color="@color/header_background" />
-    <corners android:radius="450dp" />
+    <corners android:radius="350dp" />
     <stroke
         android:width="2dp"
         android:color="@color/light_mode_border_color" /> <!-- Используйте атрибут для светлой темы -->
