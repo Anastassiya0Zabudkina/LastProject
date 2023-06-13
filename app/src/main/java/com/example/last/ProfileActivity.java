@@ -1,5 +1,6 @@
 package com.example.last;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -58,12 +60,17 @@ public class ProfileActivity extends AppCompatActivity {
         buttonProfileEditName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newName = editProfileTextName.getText().toString().trim();
-                if (!TextUtils.isEmpty(newName)) {
-                    updateName(newName);
-                } else {
-                    Toast.makeText(ProfileActivity.this, "Введите новое имя", Toast.LENGTH_SHORT).show();
-                }
+                showConfirmationDialog("Изменить имя", "Вы уверены, что хотите изменить имя?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String newName = editProfileTextName.getText().toString().trim();
+                        if (!TextUtils.isEmpty(newName)) {
+                            updateName(newName);
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Введите новое имя", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -71,12 +78,17 @@ public class ProfileActivity extends AppCompatActivity {
         buttonProfileEditPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String newPhone = editProfileTextPhone.getText().toString().trim();
-                if (!TextUtils.isEmpty(newPhone)) {
-                    updatePhone(newPhone);
-                } else {
-                    Toast.makeText(ProfileActivity.this, "Введите новый номер телефона", Toast.LENGTH_SHORT).show();
-                }
+                showConfirmationDialog("Изменить номер телефона", "Вы уверены, что хотите изменить номер телефона?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String newPhone = editProfileTextPhone.getText().toString().trim();
+                        if (!TextUtils.isEmpty(newPhone)) {
+                            updatePhone(newPhone);
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Введите новый номер телефона", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         });
 
@@ -84,33 +96,38 @@ public class ProfileActivity extends AppCompatActivity {
         buttonProfileChangePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String oldPassword = editProfileTextPassword.getText().toString().trim();
-                if (!TextUtils.isEmpty(oldPassword)) {
-                    // Проверяем старый пароль перед открытием формы изменения пароля
-                    DatabaseReference userRef = databaseReference.child("users").child(userId);
-                    userRef.child("password").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                String storedPassword = dataSnapshot.getValue(String.class);
-                                if (storedPassword.equals(oldPassword)) {
-                                    openChangePasswordActivity(userId);
-                                } else {
-                                    Toast.makeText(ProfileActivity.this, "Неправильный текущий пароль", Toast.LENGTH_SHORT).show();
+                showConfirmationDialog("Изменить пароль", "Вы уверены, что хотите изменить пароль?", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String oldPassword = editProfileTextPassword.getText().toString().trim();
+                        if (!TextUtils.isEmpty(oldPassword)) {
+                            // Проверяем старый пароль перед открытием формы изменения пароля
+                            DatabaseReference userRef = databaseReference.child("users").child(userId);
+                            userRef.child("password").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.exists()) {
+                                        String storedPassword = dataSnapshot.getValue(String.class);
+                                        if (storedPassword.equals(oldPassword)) {
+                                            openChangePasswordActivity(userId);
+                                        } else {
+                                            Toast.makeText(ProfileActivity.this, "Неправильный текущий пароль", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(ProfileActivity.this, "Ошибка при получении текущего пароля", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            } else {
-                                Toast.makeText(ProfileActivity.this, "Ошибка при получении текущего пароля", Toast.LENGTH_SHORT).show();
-                            }
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Toast.makeText(ProfileActivity.this, "Ошибка при получении текущего пароля", Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+                                    Toast.makeText(ProfileActivity.this, "Ошибка при получении текущего пароля", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        } else {
+                            Toast.makeText(ProfileActivity.this, "Введите текущий пароль", Toast.LENGTH_SHORT).show();
                         }
-                    });
-                } else {
-                    Toast.makeText(ProfileActivity.this, "Введите текущий пароль", Toast.LENGTH_SHORT).show();
-                }
+                    }
+                });
             }
         });
 
@@ -118,13 +135,11 @@ public class ProfileActivity extends AppCompatActivity {
         buttonUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 // Здесь можно добавить код для обновления других данных пользователя
                 Toast.makeText(ProfileActivity.this, "Данные обновлены", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-
             }
         });
     }
@@ -192,6 +207,17 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(changePasswordIntent);
         Toast.makeText(ProfileActivity.this, "Открыта форма изменения пароля", Toast.LENGTH_SHORT).show();
     }
+
+    // Метод для отображения диалога подтверждения
+    private void showConfirmationDialog(String title, String message, DialogInterface.OnClickListener listener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Да", listener)
+                .setNegativeButton("Нет", null)
+                .show();
+    }
 }
+
 
 
