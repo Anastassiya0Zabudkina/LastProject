@@ -1,4 +1,39 @@
 package com.example.last;
+/**
+ * Импорты:
+ *
+ * android.content.Context: Класс, предоставляющий доступ к глобальным информационным ресурсам, доступным приложению.
+ * android.content.DialogInterface: Класс, представляющий диалоговое окно пользовательского интерфейса.
+ * android.content.SharedPreferences: Класс, представляющий набор ключ-значение, хранящий данные в приватном хранилище.
+ * android.os.Bundle: Класс, используемый для передачи данных между компонентами Android.
+ * android.view.LayoutInflater: Класс, используемый для создания макета пользовательского интерфейса из XML-файла.
+ * android.view.View: Класс, представляющий компонент пользовательского интерфейса.
+ * android.view.ViewGroup: Класс, представляющий контейнер для компонентов пользовательского интерфейса.
+ * android.widget.Button: Класс, представляющий кнопку пользовательского интерфейса.
+ * android.widget.TextView: Класс, представляющий текстовое поле пользовательского интерфейса.
+ * android.widget.Toast: Класс, используемый для отображения коротких информационных сообщений.
+ * androidx.fragment.app.Fragment: Класс, представляющий фрагмент пользовательского интерфейса.
+ * androidx.recyclerview.widget.LinearLayoutManager: Класс, предоставляющий раскладку элементов в RecyclerView.
+ * androidx.recyclerview.widget.RecyclerView: Класс, представляющий виджет RecyclerView, используемый для отображения списков.
+ * com.google.android.material.dialog.MaterialAlertDialogBuilder: Класс, используемый для создания диалоговых окон Material Design.
+ * java.util.ArrayList: Класс, представляющий динамический массив элементов.
+ * java.util.HashMap: Класс, представляющий отображение ключ-значение.
+ * java.util.List: Интерфейс, представляющий список элементов.
+ *
+ * Поля:
+ *
+ * private static final String PREFS_NAME = "MyPrefs": Константа, определяющая имя файла настроек.
+ * private static final String KEY_STATUS_PREFIX = "status_": Константа, определяющая префикс для ключей статусов записи.
+ * private View view: Представление фрагмента.
+ * private RecyclerView recyclerView: Виджет RecyclerView для отображения расписания.
+ * private ScheduleAdapter adapter: Адаптер для связывания данных расписания с RecyclerView.
+ * private List<ScheduleItem> scheduleItems: Список элементов расписания.
+ * private List<String> dates: Список дат.
+ * private Button[] dateButtons: Массив кнопок для выбора даты.
+ * private TextView selectedDateTextView: Текстовое поле для отображения выбранной даты.
+ * private Map<String, List<ScheduleItem>> scheduleMap: Карта расписания, сопоставляющая дату с соответствующими элементами расписания.
+ * private SharedPreferences sharedPreferences: Объект SharedPreferences для сохранения статусов записи
+ */
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -22,6 +57,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Класс ScheduleFragment:
+ * Этот класс является фрагментом для отображения расписания с использованием RecyclerView.
+ */
+
 public class ScheduleFragment extends Fragment {
 
     private static final String PREFS_NAME = "MyPrefs";
@@ -36,6 +76,21 @@ public class ScheduleFragment extends Fragment {
     private TextView selectedDateTextView;
     private Map<String, List<ScheduleItem>> scheduleMap;
     private SharedPreferences sharedPreferences;
+
+
+    /**
+     *
+     * Методы:
+     *public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState): Метод, вызываемый при создании представления фрагмента.
+     * private void showEnrollmentStatusDialog(String course, String status, final int position): Метод для отображения диалогового окна статуса записи.
+     * private void saveStatusToSharedPreferences(int position, String status): Метод для сохранения статуса записи в SharedPreferences.
+     * private void saveStatusToSharedPreferences(String date, String status): Метод для сохранения статуса записи для указанной даты в SharedPreferences.
+     * private List<ScheduleItem> createScheduleData(): Метод для создания списка элементов расписания.
+     * private List<String> createDates(): Метод для создания списка дат.
+     * private void selectDate(int index): Метод для выбора даты.
+     * private void updateSchedule(): Метод для обновления расписания при изменении выбранной даты.
+     * private void createScheduleMap(): Метод для создания карты расписания.
+     */
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

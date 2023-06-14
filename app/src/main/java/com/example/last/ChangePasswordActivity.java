@@ -1,5 +1,11 @@
 package com.example.last;
 
+/**
+ * Этот класс реализует функционал изменения пароля пользователя в приложении.
+ * При вызове метода changePassword(),
+ * введенные пользователем значения проверяются на соответствие требованиям,
+ * а затем происходит обновление пароля в базе данных Firebase.
+ */
 
 
 import android.content.SharedPreferences;
@@ -28,6 +34,12 @@ public class ChangePasswordActivity extends AppCompatActivity {
     private static final String PREF_NAME = "login_pref";
     private static final String KEY_USER_ID = "user_id";
 
+    /**
+     * Метод, вызываемый при создании активности.
+     * Здесь происходит инициализация и настройка элементов пользовательского интерфейса, чтение значения userId из SharedPreferences, инициализация полей класса, установка обработчика событий для кнопки изменения пароля и подготовка базы данных databaseReference для взаимодействия с Firebase.
+     * savedInstanceState: Объект Bundle, который содержит ранее сохраненное состояние активности (если таковое было).
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +62,13 @@ public class ChangePasswordActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Метод, вызываемый при нажатии на кнопку изменения пароля.
+     * В этом методе выполняется проверка введенных значений старого пароля,
+     * нового пароля и подтверждения нового пароля.
+     * Если все значения введены корректно, то происходит обновление пароля в базе данных Firebase для текущего пользователя.
+     */
 
     private void changePassword() {
         String oldPassword = editOldPassword.getText().toString().trim();

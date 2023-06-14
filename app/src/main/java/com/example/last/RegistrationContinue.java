@@ -1,5 +1,28 @@
 package com.example.last;
 
+/**
+ * Импорты:
+ *
+ * androidx.annotation.NonNull: Аннотация, указывающая, что аргумент, поле или возвращаемое значение не может быть равно null.
+ * androidx.appcompat.app.AppCompatActivity: Базовый класс для активностей, использующих функции библиотеки поддержки AppCompat.
+ * android.content.Intent: Класс, представляющий намерение для запуска активностей или служб.
+ * android.os.Bundle: Класс, используемый для передачи данных между компонентами Android.
+ * android.util.Log: Класс, используемый для вывода отладочных сообщений в системный журнал.
+ * android.view.View: Класс, представляющий компонент пользовательского интерфейса.
+ * android.widget.Button: Класс, представляющий кнопку пользовательского интерфейса.
+ * android.widget.EditText: Класс, представляющий поле ввода текста.
+ * android.widget.Toast: Класс, используемый для отображения всплывающих сообщений.
+ *
+ * Поля:
+ *
+ * private EditText mEditFN: Поле для ввода имени пользователя.
+ * private EditText mEditTelephone: Поле для ввода номера телефона пользователя.
+ * private EditText mEditPassword: Поле для ввода пароля пользователя.
+ * private Button mButtonSave: Кнопка для сохранения данных пользователя.
+ * private DatabaseReference users: Ссылка на базу данных Firebase для работы с таблицей "users".
+ * FirebaseDatabase db: Ссылка на объект базы данных Firebase.
+ */
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +43,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+/**
+ * Класс RegistrationContinue:
+ * Этот класс представляет активность продолжения регистрации в приложении.
+ */
+
 public class RegistrationContinue extends AppCompatActivity {
 
     private EditText mEditFN;
@@ -29,6 +57,11 @@ public class RegistrationContinue extends AppCompatActivity {
 
     private DatabaseReference users;
     FirebaseDatabase db;
+
+    /**
+     * Метод, вызываемый при создании активности.
+     * Инициализирует компоненты интерфейса и устанавливает обработчики событий.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +76,11 @@ public class RegistrationContinue extends AppCompatActivity {
         db = FirebaseDatabase.getInstance("https://endingproject2023-default-rtdb.europe-west1.firebasedatabase.app/");
         users = db.getReference("users");
 
+
+        /**
+         * Метод, вызываемый при нажатии на кнопку "Сохранить".
+         * Собирает данные из полей ввода, проверяет их на валидность и сохраняет в базе данных Firebase.
+         */
         mButtonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +92,11 @@ public class RegistrationContinue extends AppCompatActivity {
                     Toast.makeText(RegistrationContinue.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                /**
+                 *  Метод, вызываемый при изменении данных в таблице "users" базы данных Firebase.
+                 *  Проверяет наличие пользователя с введенным номером телефона.
+                 */
 
                 Query query = users.orderByChild("telephone").equalTo(telephone);
                 query.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -79,6 +122,10 @@ public class RegistrationContinue extends AppCompatActivity {
                             });
                         }
                     }
+
+                    /**
+                     * Метод, вызываемый при ошибке чтения данных из базы данных Firebase.
+                     */
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {

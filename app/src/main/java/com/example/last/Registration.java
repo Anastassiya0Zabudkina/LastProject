@@ -1,5 +1,33 @@
 package com.example.last;
 
+/**
+ * Импорты:
+ *
+ * androidx.annotation.NonNull: Аннотация, указывающая, что аргумент, поле или возвращаемое значение не может быть равно null.
+ * androidx.appcompat.app.AppCompatActivity: Базовый класс для активностей, использующих функции библиотеки поддержки AppCompat.
+ * android.content.Intent: Класс, представляющий намерение для запуска активностей или служб.
+ * android.content.SharedPreferences: Класс, который позволяет сохранять и извлекать данные настроек.
+ * android.os.Bundle: Класс, используемый для передачи данных между компонентами Android.
+ * Класс Registration:
+ * Этот класс представляет активность регистрации в приложении.
+ *
+ * Поля:
+ *
+ * private EditText editTextUsername: Поле для ввода имени пользователя.
+ * private EditText editTextPassword: Поле для ввода пароля.
+ * private Button buttonLogin: Кнопка для выполнения входа.
+ * private Button buttonRegister: Кнопка для перехода к процессу регистрации.
+ * private CheckBox checkBoxRememberMe: Флажок для запоминания данных пользователя.
+ * private DatabaseReference databaseReference: Ссылка на базу данных Firebase.
+ * private SharedPreferences sharedPreferences: Объект для работы с настройками приложения.
+ * private static final String PREF_NAME: Константа, определяющая имя файла настроек.
+ * private static final String KEY_USERNAME: Константа, определяющая ключ для имени пользователя в настройках.
+ * private static final String KEY_PASSWORD: Константа, определяющая ключ для пароля в настройках.
+ * private static final String KEY_REMEMBER_ME: Константа, определяющая ключ для флажка "Запомнить меня" в настройках.
+ * private static final String KEY_USER_ID: Константа, определяющая ключ для идентификатора пользователя в настройках.
+ * SharedPreferences.Editor editor: Редактор для изменения настроек.
+ */
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,6 +65,10 @@ public class Registration extends AppCompatActivity {
 
     SharedPreferences.Editor editor;
 
+    /**
+     * Метод, вызываемый при создании активности.
+     * Инициализирует компоненты интерфейса и настройки.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +111,12 @@ public class Registration extends AppCompatActivity {
             editTextPassword.setText(password);
         }
     }
+
+
+    /**
+     * Метод для выполнения входа пользователя.
+     * Проверяет введенные данные и проверяет их на соответствие данным в базе данных Firebase.
+     */
 
     private void login() {
         String name = editTextUsername.getText().toString();

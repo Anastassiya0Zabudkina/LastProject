@@ -1,5 +1,10 @@
 package com.example.last;
 
+/**
+ * Класс FullscreenPhotoActivity является активностью (Activity) в приложении Android.
+ * Он отображает фотографию в полноэкранном режиме и предоставляет функциональность закрытия активности при клике на фото.
+ */
+
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +15,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.io.File;
 
 public class FullscreenPhotoActivity extends AppCompatActivity {
+
+    /**
+     * Этот метод вызывается при создании активности. Внутри него происходит инициализация активности,
+     * установка содержимого с помощью setContentView, нахождение и установка обработчика клика на fullscreenImageView.
+     * Если в переданных при создании активности данных содержится путь к фотографии (photo_path),
+     * то фотография загружается в ImageView с помощью setImageURI.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

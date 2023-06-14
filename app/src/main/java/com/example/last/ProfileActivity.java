@@ -1,5 +1,35 @@
 package com.example.last;
 
+
+/**
+ * Imports:
+ *
+ * android.content.DialogInterface: Класс, предоставляющий диалоговые окна для взаимодействия с пользователем.
+ * android.content.Intent: Класс, представляющий намерение (intent) для запуска активности или службы.
+ * android.content.SharedPreferences: Класс, позволяющий сохранять и извлекать данные настройки.
+ * android.os.Bundle: Класс, используемый для передачи данных между компонентами Android.
+ * android.text.TextUtils: Класс, предоставляющий удобные методы для работы с текстом.
+ * android.view.View: Класс, представляющий базовый элемент пользовательского интерфейса.
+ * android.widget.Button: Класс, представляющий кнопку пользовательского интерфейса.
+ * android.widget.EditText: Класс, представляющий текстовое поле пользовательского интерфейса.
+ * android.widget.TextView: Класс, представляющий нередактируемое поле текста пользовательского интерфейса.
+ * android.widget.Toast: Класс, позволяющий отображать короткие сообщения пользователю.
+ * androidx.annotation.NonNull: Аннотация, указывающая, что аргументы метода, поля или возвращаемые значения не должны быть равными null.
+ * androidx.appcompat.app.AlertDialog: Класс, предоставляющий диалоговое окно с кнопками выбора.
+ * androidx.appcompat.app.AppCompatActivity: Базовый класс для активностей совместимости.
+ * com.google.android.gms.tasks.OnCompleteListener: Интерфейс обратного вызова, выполняющийся, когда задача завершена.
+ * com.google.android.gms.tasks.Task: Класс, представляющий асинхронную операцию, которая может быть завершена или провалена.
+ * Class: ProfileActivity
+ *
+ * String userId: Идентификатор пользователя.
+ * TextView textViewProfileName: Поле для отображения имени пользователя.
+ * EditText editProfileTextName, editProfileTextPhone, editProfileTextPassword: Поля для редактирования имени, номера телефона и пароля пользователя.
+ * Button buttonProfileEditName, buttonProfileEditPhone, buttonProfileChangePassword, buttonUpdate: Кнопки для редактирования имени, номера телефона, пароля и обновления данных.
+ * DatabaseReference databaseReference: Ссылка на базу данных Firebase.
+ * static final String PREF_NAME = "login_pref": Константа с именем SharedPreferences.
+ * static final String KEY_USER_ID = "user_id": Константа с ключом для идентификатора пользователя в SharedPreferences.
+ */
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -34,6 +64,14 @@ public class ProfileActivity extends AppCompatActivity {
     private static final String PREF_NAME = "login_pref";
     private static final String KEY_USER_ID = "user_id";
 
+
+    /**
+     * Инициализация элементов пользовательского интерфейса.
+     * Получение идентификатора пользователя из SharedPreferences.
+     * Получение ссылки на базу данных Firebase.
+     * Загрузка данных пользователя из базы данных.
+     * Установка обработчиков нажатия на кнопки.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -144,6 +182,12 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+
+    /**
+     * Получение данных пользователя из базы данных.
+     * Обновление текстовых полей данными пользователя.
+     */
+
     // Метод для загрузки данных пользователя из базы данных
     private void loadUserData() {
         DatabaseReference userRef = databaseReference.child("users").child(userId);
@@ -168,6 +212,10 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Обновление имени пользователя в базе данных.
+     * Показ сообщения о результате операции.
+     */
     // Метод для обновления имени пользователя в базе данных
     private void updateName(String newName) {
         DatabaseReference userRef = databaseReference.child("users").child(userId);
@@ -183,6 +231,11 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    /**
+     * Обновление номера телефона пользователя в базе данных.
+     * Показ сообщения о результате операции.
+     */
 
     // Метод для обновления номера телефона пользователя в базе данных
     private void updatePhone(String newPhone) {
@@ -200,6 +253,11 @@ public class ProfileActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Открытие активности изменения пароля.
+     * Показ сообщения об открытии формы изменения пароля.
+     */
+
     // Метод для открытия активности изменения пароля
     private void openChangePasswordActivity(String userId) {
         // Здесь можно добавить код для открытия активности изменения пароля
@@ -208,7 +266,11 @@ public class ProfileActivity extends AppCompatActivity {
         Toast.makeText(ProfileActivity.this, "Открыта форма изменения пароля", Toast.LENGTH_SHORT).show();
     }
 
-    // Метод для отображения диалога подтверждения
+    /**
+     * Отображение диалога подтверждения с заданными заголовком,
+     * сообщением и обработчиком нажатия на кнопку "Да".
+     */
+
     private void showConfirmationDialog(String title, String message, DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(title)
