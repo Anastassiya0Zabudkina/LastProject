@@ -123,6 +123,9 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
             enrollmentStatusTextView.setText(scheduleItem.getStatus());
         }
     }
+    public ScheduleItem getItem(int position) {
+        return scheduleItems.get(position);
+    }
 }
 
 

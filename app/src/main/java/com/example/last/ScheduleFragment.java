@@ -130,6 +130,12 @@ public class ScheduleFragment extends Fragment {
         adapter = new ScheduleAdapter(scheduleItems);
         recyclerView.setAdapter(adapter);
 
+
+        for (ScheduleItem item : scheduleItems) {
+            String status = sharedPreferences.getString(KEY_STATUS_PREFIX + item.getDate(), "");
+            item.setStatus(status);
+        }
+
         adapter.setOnItemClickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -200,10 +206,13 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void saveStatusToSharedPreferences(int position, String status) {
+        ScheduleItem item = adapter.getItem(position);
+        String date = item.getDate();
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_STATUS_PREFIX + position, status);
+        editor.putString(KEY_STATUS_PREFIX + date, status);
         editor.apply();
     }
+
 
 
 
@@ -232,6 +241,7 @@ public class ScheduleFragment extends Fragment {
             String status = sharedPreferences.getString(KEY_STATUS_PREFIX + item.getDate(), "");
             item.setStatus(status);
         }
+
 
         return data;
     }
