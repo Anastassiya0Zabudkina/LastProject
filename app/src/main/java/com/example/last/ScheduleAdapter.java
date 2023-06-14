@@ -1,5 +1,47 @@
 package com.example.last;
 
+/**
+ * Импорты:
+ *
+ * android.view.LayoutInflater: Класс, используемый для создания макета пользовательского интерфейса из XML-файла.
+ * android.view.View: Класс, представляющий компонент пользовательского интерфейса.
+ * android.view.ViewGroup: Класс, представляющий контейнер для компонентов пользовательского интерфейса.
+ * android.widget.TextView: Класс, представляющий текстовое поле пользовательского интерфейса.
+ * androidx.annotation.NonNull: Аннотация, указывающая, что аргумент, поле или возвращаемое значение не может быть равно null.
+ * androidx.recyclerview.widget.RecyclerView: Класс, представляющий виджет RecyclerView, используемый для отображения списков.
+ * Класс ScheduleAdapter:
+ * Этот класс является адаптером для отображения списка элементов расписания в RecyclerView.
+ *
+ * Поля:
+ *
+ * private List<ScheduleItem> scheduleItems: Список элементов расписания.
+ * private OnItemClickListener itemClickListener: Слушатель события нажатия на элемент списка.
+ * Интерфейс OnItemClickListener:
+ * Интерфейс, определяющий метод onItemClick, который будет вызываться при нажатии на элемент списка.
+ *
+ * Методы:
+ *
+ * public void setOnItemClickListener(OnItemClickListener listener): Метод для установки слушателя события нажатия на элемент списка.
+ * public ScheduleAdapter(List<ScheduleItem> scheduleItems): Конструктор класса ScheduleAdapter, принимающий список элементов расписания.
+ * @NonNull public ScheduleViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType): Метод, вызываемый при создании нового ViewHolder для элемента списка. Создает новый объект ScheduleViewHolder.
+ * public void onBindViewHolder(@NonNull ScheduleViewHolder holder, int position): Метод, вызываемый при привязке данных к ViewHolder. Устанавливает значения полей TextView на основе данных элемента расписания.
+ * public int getItemCount(): Метод, возвращающий количество элементов в списке расписания.
+ * public void setData(List<ScheduleItem> scheduleItems): Метод для обновления данных списка элементов расписания и уведомления адаптера об изменениях.
+ * Класс ScheduleViewHolder:
+ * Вложенный класс ScheduleViewHolder, представляющий ViewHolder для элемента списка расписания.
+ *
+ * Поля:
+ *
+ * private TextView titleTextView: Текстовое поле для отображения заголовка элемента расписания.
+ * private TextView timeTextView: Текстовое поле для отображения времени элемента расписания.
+ * private TextView locationTextView: Текстовое поле для отображения местоположения элемента расписания.
+ * private TextView enrollmentStatusTextView: Текстовое поле для отображения статуса записи на элемент расписания.
+ * Методы:
+ *
+ * public ScheduleViewHolder(@NonNull View itemView): Конструктор класса ScheduleViewHolder, принимающий представление элемента списка расписания.
+ * public void bind(ScheduleItem scheduleItem): Метод, связывающий данные элемента расписания с соответствующими полями в ViewHolder. Устанавливает значения полей TextView на основе данных элемента расписания.
+ */
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

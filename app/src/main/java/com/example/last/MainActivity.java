@@ -1,5 +1,8 @@
 package com.example.last;
-
+/**
+ * MainActivity является главной активностью приложения.
+ * Она служит входной точкой и предоставляет основной пользовательский интерфейс.
+ */
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -35,7 +38,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 
-
 public class MainActivity extends BaseActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
@@ -49,10 +51,22 @@ public class MainActivity extends BaseActivity {
     private static final String PREF_NAME = "login_pref";
     private static final String KEY_USER_ID = "user_id";
 
+    /**
+     * Метод, который возвращает идентификатор ресурса макета активности
+     * (R.layout.activity_main)
+     */
+
     @Override
     protected int getLayoutResourceId() {
         return R.layout.activity_main;
     }
+
+    /**
+     * Метод, который обрабатывает выбор элемента нижней навигации.
+     * Он принимает идентификатор выбранного элемента и в зависимости от этого идентификатора выполняет соответствующие действия.
+     * Например, для элемента "Расписание" вызывается фрагмент ScheduleFragment,
+     * для элемента "Тема" происходит переключение между светлой и темной темами приложения.
+     */
 
     @Override
     protected void handleBottomNavigationItemSelected(int itemId) {
@@ -77,6 +91,12 @@ public class MainActivity extends BaseActivity {
                 break;
         }
     }
+
+    /**
+     * Метод, вызываемый при создании активности.
+     * Здесь происходит инициализация и настройка элементов пользовательского интерфейса,
+     * загрузка данных пользователя, установка обработчиков событий и другие дополнительные операции.
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,20 +146,20 @@ public class MainActivity extends BaseActivity {
                 // Создание и настройка AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setItems(new CharSequence[]{"Удалить фото", "Обновить фото"}, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                switch (which) {
-                                    case 0:
-                                        // Действие "Удалить фото"
-                                        deletePhoto();
-                                        break;
-                                    case 1:
-                                        // Действие "Обновить фото"
-                                        openGallery();
-                                        break;
-                                }
-                            }
-                        });
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        switch (which) {
+                            case 0:
+                                // Действие "Удалить фото"
+                                deletePhoto();
+                                break;
+                            case 1:
+                                // Действие "Обновить фото"
+                                openGallery();
+                                break;
+                        }
+                    }
+                });
 
                 // Отображение AlertDialog
                 builder.create().show();
@@ -184,13 +204,26 @@ public class MainActivity extends BaseActivity {
         });
     }
 
+    /**
+     * Метод, который открывает выдвижную панель (drawer) путем вызова drawerLayout.openDrawer(GravityCompat.END).
+     */
+
     private void openDrawer() {
         drawerLayout.openDrawer(GravityCompat.END);
     }
 
+    /**
+     * Метод, который закрывает выдвижную панель путем вызова drawerLayout.closeDrawer(GravityCompat.END).
+     */
+
     private void closeDrawer() {
         drawerLayout.closeDrawer(GravityCompat.END);
     }
+
+    /**
+     * Метод, вызываемый при выборе элемента меню.
+     * Здесь обрабатывается выбор элемента "Домой" (стрелка вверх) на панели действий (action bar), чтобы закрыть выдвижную панель.
+     */
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -201,6 +234,11 @@ public class MainActivity extends BaseActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Метод, который переопределяет обработку события нажатия на кнопку "Назад".
+     * Если выдвижная панель открыта, она закрывается; в противном случае, вызывается метод onBackPressed() суперкласса.
+     */
+
     @Override
     public void onBackPressed() {
         if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
@@ -210,10 +248,18 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Метод, который открывает галерею устройства для выбора изображения пользователя.
+     */
+
     private void openGallery() {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
+
+    /**
+     * Метод, который открывает активность FullscreenPhotoActivity, отображающую выбранное изображение в полноэкранном режиме.
+     */
 
     private void openFullscreenPhoto() {
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -227,6 +273,11 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Метод, который вызывается после завершения активности выбора изображения.
+     * Здесь обрабатывается выбранное изображение, загружается на сервер и сохраняется путь к файлу фотографии.
+     */
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -238,6 +289,10 @@ public class MainActivity extends BaseActivity {
             }
         }
     }
+
+    /**
+     * Метод, который загружает выбранное изображение на сервер и сохраняет путь к файлу фотографии.
+     */
 
     private void uploadPhoto(Uri imageUri) {
         try {
@@ -265,6 +320,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Метод, который сохраняет путь к файлу фотографии в настройках приложения.
+     */
+
 
     private void saveUserPhoto(String filePath) {
         // Сохранение пути к файлу фотографии в настройках приложения
@@ -273,6 +332,10 @@ public class MainActivity extends BaseActivity {
         editor.putString("user_photo_path", filePath);
         editor.apply();
     }
+
+    /**
+     * Метод, который загружает фотографию пользователя из сохраненного пути и отображает ее в элементе userPhoto.
+     */
 
 
     private void loadUserPhoto() {
@@ -287,6 +350,10 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Метод, который переключает тему приложения между светлой и темной.
+     */
+
 
     private void toggleTheme() {
         int currentNightMode = getResources().getConfiguration().uiMode & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
@@ -298,6 +365,11 @@ public class MainActivity extends BaseActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         }
     }
+
+    /**
+     * Метод, который выполняет выход из учетной записи пользователя,
+     * удаляет сохраненные данные пользователя и перенаправляет пользователя на экран авторизации.
+     */
 
     private void logout() {
         // Удаляем сохраненные данные пользователя и переходим на экран авторизации
@@ -313,11 +385,22 @@ public class MainActivity extends BaseActivity {
         finish();
     }
 
+    /**
+     * Метод, который вызывается при возобновлении активности.
+     * Здесь происходит обновление фотографии пользователя при каждом отображении активности.
+     */
+
     @Override
     protected void onResume() {
         super.onResume();
         loadUserPhoto(); // Обновление фотографии при каждом отображении активности
     }
+
+    /**
+     * Метод, который удаляет сохраненную фотографию пользователя,
+     * обновляет соответствующий элемент пользовательского интерфейса
+     * и загружает фотографию пользователя (или использует фото-заглушку).
+     */
     private void deletePhoto() {
         SharedPreferences preferences = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -327,6 +410,11 @@ public class MainActivity extends BaseActivity {
 
         loadUserPhoto();
     }
+
+
+    /**
+     * Метод, который загружает данные пользователя из базы данных Firebase и отображает имя пользователя в элементе textViewUsername.
+     */
 
 
     // Метод для загрузки данных пользователя из базы данных
