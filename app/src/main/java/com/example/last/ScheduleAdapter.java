@@ -126,6 +126,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<ScheduleAdapter.Schedu
     public ScheduleItem getItem(int position) {
         return scheduleItems.get(position);
     }
+
 }
 
 

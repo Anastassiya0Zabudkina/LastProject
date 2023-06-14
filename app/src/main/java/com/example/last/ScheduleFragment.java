@@ -206,11 +206,11 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void saveStatusToSharedPreferences(int position, String status) {
-        ScheduleItem item = adapter.getItem(position);
+        String selectedDate = selectedDateTextView.getText().toString();
+        List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
+        ScheduleItem item = filteredSchedule.get(position);
         String date = item.getDate();
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_STATUS_PREFIX + date, status);
-        editor.apply();
+        saveStatusToSharedPreferences(date, status);
     }
 
 
@@ -267,7 +267,10 @@ public class ScheduleFragment extends Fragment {
         List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
         adapter.setData(filteredSchedule);
         adapter.notifyDataSetChanged(); // Обновить весь список расписания
+
+        createScheduleMap();
     }
+
 
 
     private void createScheduleMap() {
