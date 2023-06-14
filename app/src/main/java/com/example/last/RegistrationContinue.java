@@ -112,13 +112,30 @@ public class RegistrationContinue extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        Toast.makeText(RegistrationContinue.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegistrationContinue.this, Registration.class);
-                                        startActivity(intent);
+                                        // Получаем уникальный идентификатор (userId)
+                                        String userId = users.push().getKey();
+
+                                        // Устанавливаем уникальный идентификатор для пользователя
+                                        user.setUserId(userId);
+
+                                        // Сохраняем пользователя в базе данных Firebase
+                                        users.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    Toast.makeText(RegistrationContinue.this, "User created successfully", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(RegistrationContinue.this, Registration.class);
+                                                    startActivity(intent);
+                                                } else {
+                                                    Toast.makeText(RegistrationContinue.this, "Failed to create user", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
                                     } else {
                                         Toast.makeText(RegistrationContinue.this, "Failed to create user", Toast.LENGTH_SHORT).show();
                                     }
                                 }
+
                             });
                         }
                     }
