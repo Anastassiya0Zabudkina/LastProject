@@ -238,5 +238,10 @@ public class ChatListFragment extends Fragment {
         String uniqueId = "your_unique_id_here"; // Replace with your unique identifier
         return timestamp + "_" + uniqueId;
     }
+    private void startNewChat() {
+        // Open a new activity or fragment for creating a new chat
+        Intent intent = new Intent(getActivity(), ChatActivity.class);
+        startActivity(intent);
+    }
 }
 

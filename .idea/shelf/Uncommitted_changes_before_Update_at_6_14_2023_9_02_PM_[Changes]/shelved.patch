@@ -1,0 +1,951 @@
+Index: app/src/main/res/values/colors.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<resources>\r\n    <color name=\"purple_200\">#FFBB86FC</color>\r\n    <color name=\"purple_500\">#FF6200EE</color>\r\n    <color name=\"purple_700\">#FF3700B3</color>\r\n    <color name=\"teal_200\">#FF03DAC5</color>\r\n    <color name=\"teal_700\">#FF018786</color>\r\n    <color name=\"black\">#FF000000</color>\r\n    <color name=\"white\">#FFFFFFFF</color>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/colors.xml b/app/src/main/res/values/colors.xml
+--- a/app/src/main/res/values/colors.xml	
++++ b/app/src/main/res/values/colors.xml	
+@@ -7,4 +7,5 @@
+     <color name="teal_700">#FF018786</color>
+     <color name="black">#FF000000</color>
+     <color name="white">#FFFFFFFF</color>
++    <color name="light_gray">#C0C0C0</color>
+ </resources>
+\ No newline at end of file
+Index: .idea/assetWizardSettings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/assetWizardSettings.xml b/.idea/assetWizardSettings.xml
+new file mode 100644
+--- /dev/null	
++++ b/.idea/assetWizardSettings.xml	
+@@ -0,0 +1,314 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="WizardSettings">
++    <option name="children">
++      <map>
++        <entry key="imageWizard">
++          <value>
++            <PersistentState>
++              <option name="children">
++                <map>
++                  <entry key="imageAssetPanel">
++                    <value>
++                      <PersistentState>
++                        <option name="children">
++                          <map>
++                            <entry key="actionbar">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="clipArt">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                                <entry key="imagePath" value="C:\Users\Dimash\AppData\Local\Temp\baseline_send_24.xml" />
++                                                <entry key="opacityPercent" value="80" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="clipartAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="url" value="file:/$USER_HOME$/AppData/Local/Android/Sdk/icons/material/materialicons/send/baseline_send_24.xml" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="text">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="textAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                  <option name="values">
++                                    <map>
++                                      <entry key="outputName" value="ic_send" />
++                                      <entry key="theme" value="CUSTOM" />
++                                      <entry key="themeColor" value="3398e5" />
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                            <entry key="launcher">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="foregroundClipArt">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="imagePath" value="C:\Users\Dimash\AppData\Local\Temp\ic_android_black_24dp.xml" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundImage">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundText">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundTextAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                            <entry key="launcherLegacy">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="clipArt">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                                <entry key="imagePath" value="C:\Users\Dimash\AppData\Local\Temp\ic_android_black_24dp.xml" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="text">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="textAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                            <entry key="notification">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="clipArt">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                                <entry key="imagePath" value="C:\Users\Dimash\AppData\Local\Temp\ic_android_black_24dp.xml" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="text">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="textAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                            <entry key="tvBanner">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="foregroundText">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                            <entry key="tvChannel">
++                              <value>
++                                <PersistentState>
++                                  <option name="children">
++                                    <map>
++                                      <entry key="foregroundClipArt">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="imagePath" value="C:\Users\Dimash\AppData\Local\Temp\ic_android_black_24dp.xml" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundImage">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundText">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                      <entry key="foregroundTextAsset">
++                                        <value>
++                                          <PersistentState>
++                                            <option name="values">
++                                              <map>
++                                                <entry key="color" value="000000" />
++                                              </map>
++                                            </option>
++                                          </PersistentState>
++                                        </value>
++                                      </entry>
++                                    </map>
++                                  </option>
++                                </PersistentState>
++                              </value>
++                            </entry>
++                          </map>
++                        </option>
++                        <option name="values">
++                          <map>
++                            <entry key="outputIconType" value="ACTIONBAR" />
++                          </map>
++                        </option>
++                      </PersistentState>
++                    </value>
++                  </entry>
++                </map>
++              </option>
++            </PersistentState>
++          </value>
++        </entry>
++      </map>
++    </option>
++  </component>
++</project>
+\ No newline at end of file
+Index: app/src/main/res/drawable-anydpi/ic_send.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable-anydpi/ic_send.xml b/app/src/main/res/drawable-anydpi/ic_send.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable-anydpi/ic_send.xml	
+@@ -0,0 +1,12 @@
++<vector xmlns:android="http://schemas.android.com/apk/res/android"
++    android:width="24dp"
++    android:height="24dp"
++    android:viewportWidth="24"
++    android:viewportHeight="24"
++    android:tint="#3398E5"
++    android:alpha="0.8"
++    android:autoMirrored="true">
++  <path
++      android:fillColor="@android:color/white"
++      android:pathData="M2.01,21L23,12 2.01,3 2,10l15,2 -15,2z"/>
++</vector>
+Index: app/src/main/res/layout/activity_chat_list.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/activity_chat_list.xml b/app/src/main/res/layout/activity_chat_list.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/activity_chat_list.xml	
+@@ -0,0 +1,16 @@
++<?xml version="1.0" encoding="utf-8"?>
++
++
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++xmlns:tools="http://schemas.android.com/tools"
++android:layout_width="match_parent"
++android:layout_height="match_parent"
++android:orientation="vertical"
++tools:context=".ChatListActivity">
++
++<androidx.recyclerview.widget.RecyclerView
++    android:id="@+id/recyclerView"
++    android:layout_width="match_parent"
++    android:layout_height="match_parent" />
++
++</LinearLayout>
+Index: app/src/main/res/layout/item_chat.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_chat.xml b/app/src/main/res/layout/item_chat.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/item_chat.xml	
+@@ -0,0 +1,23 @@
++<?xml version="1.0" encoding="utf-8"?>
++
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:orientation="vertical"
++    android:padding="8dp">
++
++    <TextView
++        android:id="@+id/nameTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="16sp"
++        android:textStyle="bold" />
++
++    <TextView
++        android:id="@+id/participantsTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="14sp"
++        android:textColor="@android:color/darker_gray" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/rounded_corner_receiver.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/rounded_corner_receiver.xml b/app/src/main/res/drawable/rounded_corner_receiver.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/rounded_corner_receiver.xml	
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="#FFFFFF" />
++    <corners android:radius="8dp" />
++</shape>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\">\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.LAST\"\r\n        tools:targetApi=\"31\">\r\n        <activity\r\n            android:name=\".RegistrationContinue\"\r\n            android:exported=\"false\" />\r\n        <activity\r\n            android:name=\".Registration\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".MainActivity\"\r\n            android:exported=\"true\">\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	
++++ b/app/src/main/AndroidManifest.xml	
+@@ -12,6 +12,9 @@
+         android:theme="@style/Theme.LAST"
+         tools:targetApi="31">
+         <activity
++            android:name=".ChatListActivity"
++            android:exported="false" />
++        <activity
+             android:name=".RegistrationContinue"
+             android:exported="false" />
+         <activity
+Index: app/src/main/java/com/example/last/ChatListActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/last/ChatListActivity.java b/app/src/main/java/com/example/last/ChatListActivity.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/last/ChatListActivity.java	
+@@ -0,0 +1,76 @@
++package com.example.last;
++
++import android.content.Intent;
++import android.os.Bundle;
++import android.view.MenuItem;
++import android.view.View;
++import android.widget.Toast;
++
++import androidx.appcompat.app.AppCompatActivity;
++import androidx.recyclerview.widget.LinearLayoutManager;
++import androidx.recyclerview.widget.RecyclerView;
++
++import com.google.firebase.database.DataSnapshot;
++import com.google.firebase.database.DatabaseError;
++import com.google.firebase.database.DatabaseReference;
++import com.google.firebase.database.FirebaseDatabase;
++import com.google.firebase.database.ValueEventListener;
++
++import java.util.ArrayList;
++import java.util.List;
++
++public class ChatListActivity extends AppCompatActivity implements ChatListAdapter.OnItemClickListener {
++    private RecyclerView recyclerView;
++    private ChatListAdapter adapter;
++    private List<Chat> chatList;
++    private DatabaseReference chatRef;
++
++    @Override
++    protected void onCreate(Bundle savedInstanceState) {
++        super.onCreate(savedInstanceState);
++        setContentView(R.layout.activity_chat_list);
++
++        recyclerView = findViewById(R.id.recyclerView);
++        chatList = new ArrayList<>();
++        adapter = new ChatListAdapter(chatList, this);
++
++        recyclerView.setLayoutManager(new LinearLayoutManager(this));
++        recyclerView.setAdapter(adapter);
++
++        loadChatList();
++    }
++
++    private void loadChatList() {
++        DatabaseReference chatRef = FirebaseDatabase.getInstance().getReference("chats");
++        chatRef.addValueEventListener(new ValueEventListener() {
++            @Override
++            public void onDataChange(DataSnapshot dataSnapshot) {
++                chatList.clear();
++                for (DataSnapshot chatSnapshot : dataSnapshot.getChildren()) {
++                    Chat chat = chatSnapshot.getValue(Chat.class);
++                    chat.setId(chatSnapshot.getKey());
++                    chatList.add(chat);
++                }
++                adapter.notifyDataSetChanged();
++            }
++
++            @Override
++            public void onCancelled(DatabaseError databaseError) {
++                // Handle database error
++                Toast.makeText(ChatListActivity.this, "Database error: " + databaseError.getMessage(), Toast.LENGTH_SHORT).show();
++            }
++        });
++    }
++
++    @Override
++    public void onItemClick(int position) {
++        Chat selectedChat = chatList.get(position);
++        String chatId = selectedChat.getId();
++        String chatName = selectedChat.getName();
++
++        Intent intent = new Intent(ChatListActivity.this, ChatActivity.class);
++        intent.putExtra("chatId", chatId);
++        intent.putExtra("chatName", chatName);
++        startActivity(intent);
++    }
++}
+\ No newline at end of file
+Index: app/src/main/java/com/example/last/MessageAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/last/MessageAdapter.java b/app/src/main/java/com/example/last/MessageAdapter.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/last/MessageAdapter.java	
+@@ -0,0 +1,69 @@
++package com.example.last;
++
++import android.content.Context;
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.TextView;
++
++import androidx.recyclerview.widget.RecyclerView;
++
++import java.util.List;
++
++
++public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
++    private List<Message> messageList;
++    private String currentUserId;
++
++    public MessageAdapter(List<Message> messageList) {
++        this.messageList = messageList;
++    }
++
++    @Override
++    public int getItemViewType(int position) {
++        Message message = messageList.get(position);
++        if (message.isSender(currentUserId)) {
++            return 1; // вид отправителя
++        } else {
++            return 2; // вид получателя
++        }
++    }
++
++    @Override
++    public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
++        Context context = parent.getContext();
++        LayoutInflater inflater = LayoutInflater.from(context);
++
++        View view;
++        if (viewType == 1) {
++            view = inflater.inflate(R.layout.item_message_sender, parent, false);
++        } else {
++            view = inflater.inflate(R.layout.item_message_receiver, parent, false);
++        }
++
++        return new MessageViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(MessageViewHolder holder, int position) {
++        Message message = messageList.get(position);
++        holder.messageTextView.setText(message.getMessageText());
++        holder.senderTextView.setText(message.getSenderName());
++    }
++
++    @Override
++    public int getItemCount() {
++        return messageList.size();
++    }
++
++    public class MessageViewHolder extends RecyclerView.ViewHolder {
++        private TextView messageTextView;
++        private TextView senderTextView;
++
++        public MessageViewHolder(View itemView) {
++            super(itemView);
++            messageTextView = itemView.findViewById(R.id.messageTextView);
++            senderTextView = itemView.findViewById(R.id.senderTextView);
++        }
++    }
++}
+Index: .idea/.name
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/.name b/.idea/.name
+new file mode 100644
+--- /dev/null	
++++ b/.idea/.name	
+@@ -0,0 +1,1 @@
++LAST
+\ No newline at end of file
+Index: app/src/main/java/com/example/last/Message.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/last/Message.java b/app/src/main/java/com/example/last/Message.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/last/Message.java	
+@@ -0,0 +1,79 @@
++package com.example.last;
++
++import java.text.SimpleDateFormat;
++import java.util.Date;
++import java.util.Locale;
++
++
++
++public class Message {
++    private String messageId;
++    private String messageText;
++    private String senderId;
++    private String senderName;
++    private long timestamp;
++
++    public Message() {
++        // Required empty constructor for Firebase
++    }
++
++    public Message(String messageId, String messageText, String senderId, String senderName, long timestamp) {
++        this.messageId = messageId;
++        this.messageText = messageText;
++        this.senderId = senderId;
++        this.senderName = senderName;
++        this.timestamp = timestamp;
++    }
++
++    public String getMessageId() {
++        return messageId;
++    }
++
++    public void setMessageId(String messageId) {
++        this.messageId = messageId;
++    }
++
++    public String getMessageText() {
++        return messageText;
++    }
++
++    public void setMessageText(String messageText) {
++        this.messageText = messageText;
++    }
++
++    public String getSenderId() {
++        return senderId;
++    }
++
++    public void setSenderId(String senderId) {
++        this.senderId = senderId;
++    }
++
++    public String getSenderName() {
++        return senderName;
++    }
++
++    public void setSenderName(String senderName) {
++        this.senderName = senderName;
++    }
++
++    public long getTimestamp() {
++        return timestamp;
++    }
++
++    public void setTimestamp(long timestamp) {
++        this.timestamp = timestamp;
++    }
++
++    public boolean isSender(String userId) {
++        return senderId.equals(userId);
++    }
++
++    public String getTime() {
++        // Convert timestamp to a formatted time string
++        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm", Locale.getDefault());
++        Date date = new Date(timestamp);
++        return sdf.format(date);
++    }
++}
++
+Index: app/src/main/res/layout/item_message_receiver.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_message_receiver.xml b/app/src/main/res/layout/item_message_receiver.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/item_message_receiver.xml	
+@@ -0,0 +1,34 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:padding="8dp"
++    android:gravity="start">
++
++    <TextView
++        android:id="@+id/receiverNameTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textColor="#333333"
++        android:textSize="12sp"
++        android:textStyle="bold" />
++
++    <TextView
++        android:id="@+id/messageTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="4dp"
++        android:background="@drawable/rounded_corner_receiver"
++        android:padding="8dp"
++        android:textColor="#333333"
++        android:textSize="16sp" />
++
++    <TextView
++        android:id="@+id/timestampTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginTop="4dp"
++        android:textColor="#999999"
++        android:textSize="12sp" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/example/last/ChatListAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/last/ChatListAdapter.java b/app/src/main/java/com/example/last/ChatListAdapter.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/last/ChatListAdapter.java	
+@@ -0,0 +1,61 @@
++package com.example.last;
++
++import android.view.LayoutInflater;
++import android.view.View;
++import android.view.ViewGroup;
++import android.widget.TextView;
++
++import androidx.recyclerview.widget.RecyclerView;
++
++import java.util.List;
++public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
++    private List<Chat> chatList;
++    private OnItemClickListener listener;
++
++    public interface OnItemClickListener {
++        void onItemClick(int position);
++    }
++
++    public ChatListAdapter(List<Chat> chatList, OnItemClickListener listener) {
++        this.chatList = chatList;
++        this.listener = listener;
++    }
++
++    @Override
++    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
++        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chat, parent, false);
++        return new ViewHolder(view);
++    }
++
++    @Override
++    public void onBindViewHolder(ViewHolder holder, int position) {
++        Chat chat = chatList.get(position);
++        holder.nameTextView.setText(chat.getName());
++        holder.participantsTextView.setText(chat.getParticipants());
++    }
++
++    @Override
++    public int getItemCount() {
++        return chatList.size();
++    }
++
++    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
++        public TextView nameTextView;
++        public TextView participantsTextView;
++
++        public ViewHolder(View itemView) {
++            super(itemView);
++            nameTextView = itemView.findViewById(R.id.nameTextView);
++            participantsTextView = itemView.findViewById(R.id.participantsTextView);
++            itemView.setOnClickListener(this);
++        }
++
++        @Override
++        public void onClick(View v) {
++            int position = getAdapterPosition();
++            if (position != RecyclerView.NO_POSITION) {
++                listener.onItemClick(position);
++            }
++        }
++    }
++}
+Index: app/src/main/res/layout/item_message_sender.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/layout/item_message_sender.xml b/app/src/main/res/layout/item_message_sender.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/layout/item_message_sender.xml	
+@@ -0,0 +1,30 @@
++<?xml version="1.0" encoding="utf-8"?>
++<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
++    android:layout_width="match_parent"
++    android:layout_height="wrap_content"
++    android:padding="8dp">
++
++    <TextView
++        android:id="@+id/senderTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:textSize="14sp"
++        android:textStyle="bold" />
++
++    <TextView
++        android:id="@+id/messageTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:layout_marginEnd="8dp"
++        android:textSize="16sp" />
++
++    <TextView
++        android:id="@+id/timeTextView"
++        android:layout_width="wrap_content"
++        android:layout_height="wrap_content"
++        android:layout_marginStart="8dp"
++        android:textSize="12sp"
++        android:textColor="@android:color/darker_gray" />
++
++</LinearLayout>
+\ No newline at end of file
+Index: app/src/main/res/drawable/rounded_corner_sender.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/drawable/rounded_corner_sender.xml b/app/src/main/res/drawable/rounded_corner_sender.xml
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/res/drawable/rounded_corner_sender.xml	
+@@ -0,0 +1,5 @@
++<?xml version="1.0" encoding="utf-8"?>
++<shape xmlns:android="http://schemas.android.com/apk/res/android">
++    <solid android:color="#DCF8C6" />
++    <corners android:radius="8dp" />
++</shape>
+\ No newline at end of file
+Index: app/src/main/java/com/example/last/Chat.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/last/Chat.java b/app/src/main/java/com/example/last/Chat.java
+new file mode 100644
+--- /dev/null	
++++ b/app/src/main/java/com/example/last/Chat.java	
+@@ -0,0 +1,40 @@
++package com.example.last;
++
++public class Chat {
++    private String id;
++    private String name;
++    private String participants;
++
++    public Chat() {
++        //для работы firebase
++    }
++
++    public Chat(String name, String participants) {
++        this.name = name;
++        this.participants = participants;
++    }
++
++    public String getId() {
++        return id;
++    }
++
++    public void setId(String id) {
++        this.id = id;
++    }
++
++    public String getName() {
++        return name;
++    }
++
++    public void setName(String name) {
++        this.name = name;
++    }
++
++    public String getParticipants() {
++        return participants;
++    }
++
++    public void setParticipants(String participants) {
++        this.participants = participants;
++    }
++}
+\ No newline at end of file

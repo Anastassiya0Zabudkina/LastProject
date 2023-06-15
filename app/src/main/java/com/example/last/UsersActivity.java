@@ -56,7 +56,9 @@ package com.example.last;
  * Toast.makeText(UsersActivity.this, "Ошибка: " + errorMessage, Toast.LENGTH_SHORT).show(): Отображение всплывающего сообщения с ошибкой.
  */
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -113,5 +115,6 @@ public class UsersActivity extends AppCompatActivity {
                 Toast.makeText(UsersActivity.this, "Ошибка: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
+            }
     }
-}
+

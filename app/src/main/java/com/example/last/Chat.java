@@ -8,7 +8,7 @@ public class Chat {
     private String participants;
 
     public Chat(String chatId, String chatTitle, List<String> participants) {
-        // Default constructor required for Firebase Realtime Database
+        // пустое поле для работы бд
     }
 
     public Chat(String id, String title, String participants) {
@@ -29,6 +29,6 @@ public class Chat {
         return participants;
     }
 
-    // Other getters and setters if needed
+
 }
 

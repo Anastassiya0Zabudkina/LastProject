@@ -73,6 +73,9 @@ public class MainActivity extends BaseActivity {
         switch (itemId) {
             case R.id.action_news:
                 // Обработка нажатия на элемент "Новости"
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new NewsFragment())
+                        .commit();
                 break;
             case R.id.action_schedule:
                 // Обработка нажатия на элемент "Расписание"
@@ -82,9 +85,15 @@ public class MainActivity extends BaseActivity {
                 return;
             case R.id.action_chat:
                 // Обработка нажатия на элемент "Чат"
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new ChatListFragment())
+                        .commit();
                 break;
             case R.id.action_graduates:
                 // Обработка нажатия на элемент "Работы выпускников"
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.container, new HomeworkFragment())
+                        .commit();
                 break;
             case R.id.action_more:
                 openDrawer();

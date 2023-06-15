@@ -10,10 +10,16 @@
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="Education Campus"
         android:supportsRtl="true"
         android:theme="@style/Theme.LAST"
         tools:targetApi="31">
+        <activity
+            android:name=".CreateGroupChatActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MemberSelectionActivity"
+            android:exported="false" />
         <activity
             android:name=".ChatActivity"
             android:exported="false" />
@@ -54,6 +60,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:exported="false">
+
+            <!-- Define your activity configuration here -->
         </activity>
     </application>
 

@@ -13,11 +13,25 @@
         android:imeOptions="actionDone"
         android:singleLine="true" />
 
-    <Button
-        android:id="@+id/createGroupChatButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Group Chat" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/createGroupChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Group Chat"
+            android:layout_alignParentLeft="true" />
+
+        <Button
+            android:id="@+id/startNewChatButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start New Chat"
+            android:layout_alignParentRight="true" />
+
+    </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
