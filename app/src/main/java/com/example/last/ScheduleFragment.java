@@ -130,6 +130,12 @@ public class ScheduleFragment extends Fragment {
         adapter = new ScheduleAdapter(scheduleItems);
         recyclerView.setAdapter(adapter);
 
+
+        for (ScheduleItem item : scheduleItems) {
+            String status = sharedPreferences.getString(KEY_STATUS_PREFIX + item.getDate(), "");
+            item.setStatus(status);
+        }
+
         adapter.setOnItemClickListener(new ScheduleAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -200,10 +206,13 @@ public class ScheduleFragment extends Fragment {
     }
 
     private void saveStatusToSharedPreferences(int position, String status) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(KEY_STATUS_PREFIX + position, status);
-        editor.apply();
+        String selectedDate = selectedDateTextView.getText().toString();
+        List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
+        ScheduleItem item = filteredSchedule.get(position);
+        String date = item.getDate();
+        saveStatusToSharedPreferences(date, status);
     }
+
 
 
 
@@ -233,6 +242,7 @@ public class ScheduleFragment extends Fragment {
             item.setStatus(status);
         }
 
+
         return data;
     }
 
@@ -257,7 +267,10 @@ public class ScheduleFragment extends Fragment {
         List<ScheduleItem> filteredSchedule = scheduleMap.get(selectedDate);
         adapter.setData(filteredSchedule);
         adapter.notifyDataSetChanged(); // Обновить весь список расписания
+
+        createScheduleMap();
     }
+
 
 
     private void createScheduleMap() {
