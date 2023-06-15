@@ -12,6 +12,7 @@
     <color name="header_background_dark">#5A8CA1</color>
     <color name="dark_mode_border_color">#5A8CA1</color>
     <color name="light_mode_border_color">#E1F5FE</color>
+    <color name="avatar_placeholder_color">#CCCCCC</color>
 
 
 </resources>
