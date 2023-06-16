@@ -1,0 +1,49 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/rounded_corner_background"
+    android:padding="16dp"
+    android:layout_margin="8dp">
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceMedium"
+        android:text="Название занятия"
+        android:gravity="left"
+        android:layout_weight="1"
+        android:textColor="@color/dark_mode_border_color"/>
+
+    <TextView
+        android:id="@+id/timeTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="Время занятия"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/dark_mode_border_color"/>
+
+    <TextView
+        android:id="@+id/locationTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="Место занятия"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:textColor="@color/dark_mode_border_color"/>
+
+    <TextView
+        android:id="@+id/enrollmentStatusTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:textAppearanceSmall"
+        android:text="Статус записи"
+        android:gravity="right"
+        android:textColor="@color/dark_mode_border_color"/>
+
+</LinearLayout>
+
+
