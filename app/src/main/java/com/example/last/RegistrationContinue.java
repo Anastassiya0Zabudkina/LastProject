@@ -107,35 +107,21 @@ public class RegistrationContinue extends AppCompatActivity {
                         } else {
                             User user = new User(name, telephone, password);
 
-                            String userId = users.push().getKey();
+                            String userId = users.push().getKey(); // Получаем уникальный идентификатор (userId)
+                            user.setUserId(userId); // Устанавливаем уникальный идентификатор для пользователя
+
+// Сохраняем пользователя в базе данных Firebase
                             users.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if (task.isSuccessful()) {
-                                        // Получаем уникальный идентификатор (userId)
-                                        String userId = users.push().getKey();
-
-                                        // Устанавливаем уникальный идентификатор для пользователя
-                                        user.setUserId(userId);
-
-                                        // Сохраняем пользователя в базе данных Firebase
-                                        users.child(userId).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                if (task.isSuccessful()) {
-                                                    Toast.makeText(RegistrationContinue.this, "User created successfully", Toast.LENGTH_SHORT).show();
-                                                    Intent intent = new Intent(RegistrationContinue.this, Registration.class);
-                                                    startActivity(intent);
-                                                } else {
-                                                    Toast.makeText(RegistrationContinue.this, "Failed to create user", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
+                                        Toast.makeText(RegistrationContinue.this, "User created successfully", Toast.LENGTH_SHORT).show();
+                                        Intent intent = new Intent(RegistrationContinue.this, Registration.class);
+                                        startActivity(intent);
                                     } else {
                                         Toast.makeText(RegistrationContinue.this, "Failed to create user", Toast.LENGTH_SHORT).show();
                                     }
                                 }
-
                             });
                         }
                     }

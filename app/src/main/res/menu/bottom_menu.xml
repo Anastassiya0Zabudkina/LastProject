@@ -1,23 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/action_news"
-        android:title="Новости"
-        android:icon="@drawable/ic_action_news" />
+<!--    <item-->
+<!--        android:id="@+id/action_news"-->
+<!--        android:title="Новости"-->
+<!--        android:icon="@drawable/ic_action_news" />-->
 
     <item
         android:id="@+id/action_schedule"
         android:title="Расписание"
         android:icon="@drawable/ic_action_shedule" />
 
-    <item
-        android:id="@+id/action_chat"
-        android:title="Чат"
-        android:icon="@drawable/ic_action_chat" />
+<!--    <item-->
+<!--        android:id="@+id/action_chat"-->
+<!--        android:title="Чат"-->
+<!--        android:icon="@drawable/ic_action_chat" />-->
 
-    <item
-        android:id="@+id/action_graduates"
-        android:title="Работы"
-        android:icon="@drawable/ic_action_graduates" />
+<!--    <item-->
+<!--        android:id="@+id/action_graduates"-->
+<!--        android:title="Работы"-->
+<!--        android:icon="@drawable/ic_action_graduates" />-->
 
     <item
         android:id="@+id/action_more"

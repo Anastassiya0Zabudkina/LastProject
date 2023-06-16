@@ -71,21 +71,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void handleBottomNavigationItemSelected(int itemId) {
         switch (itemId) {
-            case R.id.action_news:
-                // Обработка нажатия на элемент "Новости"
-                break;
+//            case R.id.action_news:
+//                // Обработка нажатия на элемент "Новости"
+//                break;
             case R.id.action_schedule:
                 // Обработка нажатия на элемент "Расписание"
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.container, new ScheduleFragment())
                         .commit();
                 return;
-            case R.id.action_chat:
-                // Обработка нажатия на элемент "Чат"
-                break;
-            case R.id.action_graduates:
-                // Обработка нажатия на элемент "Работы выпускников"
-                break;
+//            case R.id.action_chat:
+//                // Обработка нажатия на элемент "Чат"
+//                break;
+//            case R.id.action_graduates:
+//                // Обработка нажатия на элемент "Работы выпускников"
+//                break;
             case R.id.action_more:
                 openDrawer();
                 break;
@@ -439,6 +439,7 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
 
 
 }
